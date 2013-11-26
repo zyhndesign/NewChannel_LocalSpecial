@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>04886830-33E6-43E3-8BA9-4EA153CC43FA</string>
+	<key>IDESourceControlProjectName</key>
+	<string>TongDao</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>EDB41CCC-F44B-46A4-BD49-5D3688E2D876</key>
+		<string>https://github.com/zyhndesign/NewChannel_IOS.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>TongDao1/TongDao.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>EDB41CCC-F44B-46A4-BD49-5D3688E2D876</key>
+		<string>../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/zyhndesign/NewChannel_IOS.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>EDB41CCC-F44B-46A4-BD49-5D3688E2D876</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>EDB41CCC-F44B-46A4-BD49-5D3688E2D876</string>
+			<key>IDESourceControlWCCName</key>
+			<string>NewChannel_IOS</string>
+		</dict>
+	</array>
+</dict>
+</plist>
