@@ -5,36 +5,36 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>04886830-33E6-43E3-8BA9-4EA153CC43FA</string>
+	<string>589EE306-5722-420F-B646-D85E7BA2A7F8</string>
 	<key>IDESourceControlProjectName</key>
 	<string>TongDao</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>EDB41CCC-F44B-46A4-BD49-5D3688E2D876</key>
-		<string>https://github.com/zyhndesign/NewChannel_IOS.git</string>
+		<key>F7C0202E-9ABE-4BC7-BE7C-C0E6B286B534</key>
+		<string>https://github.com/zyhndesign/NewChannel_LocalSpecial.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>TongDao1/TongDao.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>EDB41CCC-F44B-46A4-BD49-5D3688E2D876</key>
+		<key>F7C0202E-9ABE-4BC7-BE7C-C0E6B286B534</key>
 		<string>../../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>https://github.com/zyhndesign/NewChannel_IOS.git</string>
+	<string>https://github.com/zyhndesign/NewChannel_LocalSpecial.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>110</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>EDB41CCC-F44B-46A4-BD49-5D3688E2D876</string>
+	<string>F7C0202E-9ABE-4BC7-BE7C-C0E6B286B534</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>EDB41CCC-F44B-46A4-BD49-5D3688E2D876</string>
+			<string>F7C0202E-9ABE-4BC7-BE7C-C0E6B286B534</string>
 			<key>IDESourceControlWCCName</key>
-			<string>NewChannel_IOS</string>
+			<string>NewChannel_LocalSpecial</string>
 		</dict>
 	</array>
 </dict>
