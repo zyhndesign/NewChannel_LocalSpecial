@@ -40,7 +40,6 @@
     [movie.view addSubview:activeView];
     
     [super viewDidLoad];
-    
 }
 
 - (id)initwithURL:(NSString*)URLStr

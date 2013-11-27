@@ -70,10 +70,10 @@ static NSString *const kTrackingId = @"UA-44083057-4";
     [self.window makeKeyAndVisible];
     RootViewContr = self.viewController;
     
-    GetVersion *getVision = [[GetVersion alloc] init];
-    getVision.delegate = self;
-    [getVision getVersonFromItunes];
-    [getVision release];
+//    GetVersion *getVision = [[GetVersion alloc] init];
+//    getVision.delegate = self;
+//    [getVision getVersonFromItunes];
+//    [getVision release];
     
     return YES;
 }

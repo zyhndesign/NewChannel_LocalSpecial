@@ -47,6 +47,7 @@
     
     [QueueProHanle   init];
     [QueueZipHandle  init];
+    
     AllMusicQueAry = [[NSMutableArray alloc] init];
     NSString *path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
     NSArray *array = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:[path stringByAppendingString:@"/music"] error:nil];
