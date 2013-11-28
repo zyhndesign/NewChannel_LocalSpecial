@@ -46,7 +46,7 @@
 {
     self = [super init];
     if (self) {
-        urlStr = [[URLStr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] retain];
+        urlStr = [URLStr retain];
     }
     return self;
 }
@@ -57,7 +57,7 @@
     
     LoadSimpleMovieNet *loadMoiveNet = [[LoadSimpleMovieNet alloc] init];
     
-    if([loadMoiveNet loadMusicData:urlStr musicName:[tempAry lastObject]])
+    if([loadMoiveNet loadMusicData:[urlStr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] musicName:[tempAry lastObject]])
     {
         NSString *path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
         NSString *filePath = [path stringByAppendingPathComponent:[NSString stringWithFormat:@"movie/%@", [tempAry lastObject]]];

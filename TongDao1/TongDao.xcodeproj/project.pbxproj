@@ -201,9 +201,9 @@
 		D3E7B03E17F4658E00A1123E /* SimpleLandscView.m in Sources */ = {isa = PBXBuildFile; fileRef = D3E7B03D17F4658E00A1123E /* SimpleLandscView.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		D3E7B04117F469DA00A1123E /* SimpleHumanityView.m in Sources */ = {isa = PBXBuildFile; fileRef = D3E7B04017F469DA00A1123E /* SimpleHumanityView.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		D3E7B04417F4723700A1123E /* SimpleTrationSmallView.m in Sources */ = {isa = PBXBuildFile; fileRef = D3E7B04317F4723700A1123E /* SimpleTrationSmallView.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		D3EDACC01846EA7A00CD62B7 /* QueueOnceLoaderZip.m in Sources */ = {isa = PBXBuildFile; fileRef = D3EDACBF1846EA7A00CD62B7 /* QueueOnceLoaderZip.m */; };
-		D3EDACC31846F9B700CD62B7 /* XMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = D3EDACC21846F9B700CD62B7 /* XMLParser.m */; };
-		D3EDACC618471FA500CD62B7 /* QueueVideoHandle.m in Sources */ = {isa = PBXBuildFile; fileRef = D3EDACC518471FA500CD62B7 /* QueueVideoHandle.m */; };
+		D3EDACC01846EA7A00CD62B7 /* QueueOnceLoaderZip.m in Sources */ = {isa = PBXBuildFile; fileRef = D3EDACBF1846EA7A00CD62B7 /* QueueOnceLoaderZip.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		D3EDACC31846F9B700CD62B7 /* XMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = D3EDACC21846F9B700CD62B7 /* XMLParser.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		D3EDACC618471FA500CD62B7 /* QueueVideoHandle.m in Sources */ = {isa = PBXBuildFile; fileRef = D3EDACC518471FA500CD62B7 /* QueueVideoHandle.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		D3F346781808E2BE00479AC8 /* ContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = D3F346771808E2BE00479AC8 /* ContentView.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		D3F3467B1808E4A600479AC8 /* ImageShowView.m in Sources */ = {isa = PBXBuildFile; fileRef = D3F3467A1808E4A600479AC8 /* ImageShowView.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		D3F3467E1808ED1D00479AC8 /* HeadProImageNet.m in Sources */ = {isa = PBXBuildFile; fileRef = D3F3467D1808ED1D00479AC8 /* HeadProImageNet.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
