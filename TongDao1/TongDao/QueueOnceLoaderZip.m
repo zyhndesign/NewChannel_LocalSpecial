@@ -1,17 +1,15 @@
 //
-//  QueueZipHandle.m
-//  GYSJ
+//  QueueOnceLoaderZip.m
+//  TongDao
 //
-//  Created by sunyong on 13-9-24.
+//  Created by sunyong on 13-11-28.
 //  Copyright (c) 2013年 sunyong. All rights reserved.
 //
 
-#import "QueueZipHandle.h"
+#import "QueueOnceLoaderZip.h"
 #import "LoadZipFileNet.h"
-#import "AllVariable.h"
-#import "ViewController.h"
 
-@implementation QueueZipHandle
+@implementation QueueOnceLoaderZip
 static __strong NSMutableArray *allTaskAry;
 
 + (void)init
@@ -22,36 +20,10 @@ static __strong NSMutableArray *allTaskAry;
     }
 }
 
-+ (BOOL)isHaveTask
-{
-    if (allTaskAry.count > 0) {
-        return YES;
-    }
-    return NO;
-}
-
-+ (void)startTask
-{
-    if (allTaskAry.count > 0)
-    {
-        LoadZipFileNet *tempProNet = [allTaskAry lastObject];
-        [tempProNet loadMenuFromUrl];
-    }
-    else
-    {
-        [RootViewContr startLoadMovie];
-    }
-}
-
 static int position;
 + (void)addTarget:(id)target
 {
-    if (AllOnceLoad)
-    {
-        [allTaskAry addObject:target];
-        return;
-    }
-    if ([QueueZipHandle isEixstInAry:allTaskAry zipNet:target])
+    if ([QueueOnceLoaderZip isEixstInAry:allTaskAry zipNet:target])
     {
         LoadZipFileNet *tempProNet = (LoadZipFileNet*)[allTaskAry lastObject];
         LoadZipFileNet *currentProNet = target;
@@ -93,8 +65,6 @@ static int position;
         LoadZipFileNet *zipNet = [array objectAtIndex:i];
         if ([zipNet.urlStr isEqualToString:target.urlStr])
         {
-            position = i;
-            zipNet.delegate = target.delegate;
             return YES;
         }
     }
@@ -110,10 +80,7 @@ static int position;
         LoadZipFileNet *tempProNet = (LoadZipFileNet*)[allTaskAry lastObject];
         [tempProNet loadMenuFromUrl];
     }
-    else
-    {
-        [RootViewContr startLoadMovie];
-    };
+    else;
 }
 
 @end

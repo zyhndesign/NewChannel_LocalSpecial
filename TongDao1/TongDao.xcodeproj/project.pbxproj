@@ -201,6 +201,9 @@
 		D3E7B03E17F4658E00A1123E /* SimpleLandscView.m in Sources */ = {isa = PBXBuildFile; fileRef = D3E7B03D17F4658E00A1123E /* SimpleLandscView.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		D3E7B04117F469DA00A1123E /* SimpleHumanityView.m in Sources */ = {isa = PBXBuildFile; fileRef = D3E7B04017F469DA00A1123E /* SimpleHumanityView.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		D3E7B04417F4723700A1123E /* SimpleTrationSmallView.m in Sources */ = {isa = PBXBuildFile; fileRef = D3E7B04317F4723700A1123E /* SimpleTrationSmallView.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		D3EDACC01846EA7A00CD62B7 /* QueueOnceLoaderZip.m in Sources */ = {isa = PBXBuildFile; fileRef = D3EDACBF1846EA7A00CD62B7 /* QueueOnceLoaderZip.m */; };
+		D3EDACC31846F9B700CD62B7 /* XMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = D3EDACC21846F9B700CD62B7 /* XMLParser.m */; };
+		D3EDACC618471FA500CD62B7 /* QueueVideoHandle.m in Sources */ = {isa = PBXBuildFile; fileRef = D3EDACC518471FA500CD62B7 /* QueueVideoHandle.m */; };
 		D3F346781808E2BE00479AC8 /* ContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = D3F346771808E2BE00479AC8 /* ContentView.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		D3F3467B1808E4A600479AC8 /* ImageShowView.m in Sources */ = {isa = PBXBuildFile; fileRef = D3F3467A1808E4A600479AC8 /* ImageShowView.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		D3F3467E1808ED1D00479AC8 /* HeadProImageNet.m in Sources */ = {isa = PBXBuildFile; fileRef = D3F3467D1808ED1D00479AC8 /* HeadProImageNet.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
@@ -458,6 +461,12 @@
 		D3E7B04017F469DA00A1123E /* SimpleHumanityView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleHumanityView.m; sourceTree = "<group>"; };
 		D3E7B04217F4723700A1123E /* SimpleTrationSmallView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleTrationSmallView.h; sourceTree = "<group>"; };
 		D3E7B04317F4723700A1123E /* SimpleTrationSmallView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleTrationSmallView.m; sourceTree = "<group>"; };
+		D3EDACBE1846EA7A00CD62B7 /* QueueOnceLoaderZip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QueueOnceLoaderZip.h; sourceTree = "<group>"; };
+		D3EDACBF1846EA7A00CD62B7 /* QueueOnceLoaderZip.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QueueOnceLoaderZip.m; sourceTree = "<group>"; };
+		D3EDACC11846F9B700CD62B7 /* XMLParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMLParser.h; sourceTree = "<group>"; };
+		D3EDACC21846F9B700CD62B7 /* XMLParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMLParser.m; sourceTree = "<group>"; };
+		D3EDACC418471FA500CD62B7 /* QueueVideoHandle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QueueVideoHandle.h; sourceTree = "<group>"; };
+		D3EDACC518471FA500CD62B7 /* QueueVideoHandle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QueueVideoHandle.m; sourceTree = "<group>"; };
 		D3F346761808E2BE00479AC8 /* ContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContentView.h; sourceTree = "<group>"; };
 		D3F346771808E2BE00479AC8 /* ContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContentView.m; sourceTree = "<group>"; };
 		D3F346791808E4A600479AC8 /* ImageShowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageShowView.h; sourceTree = "<group>"; };
@@ -757,8 +766,14 @@
 				D38A15CC1807CCEA00AEDF98 /* QueueProHanle.m */,
 				D38A15CF1807CCEA00AEDF98 /* QueueZipHandle.h */,
 				D38A15D01807CCEA00AEDF98 /* QueueZipHandle.m */,
+				D3EDACC418471FA500CD62B7 /* QueueVideoHandle.h */,
+				D3EDACC518471FA500CD62B7 /* QueueVideoHandle.m */,
 				D343236717E5A24100F6B5E5 /* LocalSQL.h */,
 				D343236817E5A24100F6B5E5 /* LocalSQL.m */,
+				D3EDACBE1846EA7A00CD62B7 /* QueueOnceLoaderZip.h */,
+				D3EDACBF1846EA7A00CD62B7 /* QueueOnceLoaderZip.m */,
+				D3EDACC11846F9B700CD62B7 /* XMLParser.h */,
+				D3EDACC21846F9B700CD62B7 /* XMLParser.m */,
 			);
 			name = DataBase;
 			sourceTree = "<group>";
@@ -1237,8 +1252,10 @@
 				D308826A17E5467B00F24817 /* AppDelegate.m in Sources */,
 				D308827317E5467B00F24817 /* ViewController.m in Sources */,
 				D3F346781808E2BE00479AC8 /* ContentView.m in Sources */,
+				D3EDACC618471FA500CD62B7 /* QueueVideoHandle.m in Sources */,
 				D308828117E5485800F24817 /* MFSP_MD5.m in Sources */,
 				D308828517E5486F00F24817 /* ZipArchive.mm in Sources */,
+				D3EDACC31846F9B700CD62B7 /* XMLParser.m in Sources */,
 				D37DB57418443F21006C0A57 /* LoadSimpleMusicNet.m in Sources */,
 				D30882A117E5489700F24817 /* JSONKit.m in Sources */,
 				D30882A217E5489700F24817 /* Parser.m in Sources */,
@@ -1267,6 +1284,7 @@
 				D3057E9C17E7ED3900505C69 /* MoviePlayViewContr.m in Sources */,
 				D38A15D31807CCEA00AEDF98 /* QueueZipHandle.m in Sources */,
 				D32ED8BA180E33D4003AB2A3 /* TextLayoutView.m in Sources */,
+				D3EDACC01846EA7A00CD62B7 /* QueueOnceLoaderZip.m in Sources */,
 				D3057EA617E823BD00505C69 /* VersionViewContr.m in Sources */,
 				D3057EB717E8323000505C69 /* ActiveView.m in Sources */,
 				D3E7B04117F469DA00A1123E /* SimpleHumanityView.m in Sources */,

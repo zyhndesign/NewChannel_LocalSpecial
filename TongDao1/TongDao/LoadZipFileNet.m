@@ -11,6 +11,7 @@
 #import "ZipArchive.h"
 #import "AllVariable.h"
 #import "ContentView.h"
+#import "ViewController.h"
 
 @implementation LoadZipFileNet
 
@@ -62,7 +63,7 @@
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
 {
-    if (connectNum == 1)
+    if (connectNum >= 0)
     {
         [QueueZipHandle taskFinish:self];
         if ([delegate respondsToSelector:@selector(didReceiveErrorCode:)])
@@ -76,14 +77,23 @@
     
 }
 
-
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
 {
     [backData appendData:data];
-    ContentView *contentVC = (ContentView*)delegate;
-    contentVC.progressV.progress = [backData length]/zipSize;
-    int value = [backData length]/zipSize * 100;
-    contentVC.proValueLb.text = [NSString stringWithFormat:@"%2d", value];
+    if (delegate)
+    {
+        ContentView *contentVC = (ContentView*)delegate;
+        contentVC.progressV.progress = [backData length]/zipSize;
+        int value = [backData length]/zipSize * 100;
+        contentVC.proValueLb.text = [NSString stringWithFormat:@"%2d", value];
+    }
+    else
+    {
+        AllLoadLenght += [data length];
+        RootViewContr.valueLb.text = [NSString stringWithFormat:@"%0.2f", AllLoadLenght*100.0/AllZipSize];
+        RootViewContr.progressView.progress = AllLoadLenght*1.0/AllZipSize;
+    }
+    
 }
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection

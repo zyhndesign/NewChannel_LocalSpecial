@@ -10,13 +10,17 @@
                 <outlet property="_scrollView" destination="4" id="9"/>
                 <outlet property="activeView" destination="96" id="97"/>
                 <outlet property="btView" destination="54" id="71"/>
+                <outlet property="charatLb" destination="HTD-XT-rHa" id="hf4-qI-uZO"/>
+                <outlet property="implyLb" destination="xKi-Nl-Yvd" id="yXB-Gk-rhm"/>
                 <outlet property="launchImageV" destination="90" id="91"/>
                 <outlet property="menuImageV" destination="72" id="83"/>
                 <outlet property="musicShowBt" destination="94" id="95"/>
                 <outlet property="musicView" destination="99" id="100"/>
                 <outlet property="otherContentV" destination="92" id="93"/>
+                <outlet property="progressView" destination="PQu-CH-dWj" id="eSA-9l-Nmk"/>
                 <outlet property="slipLb" destination="64" id="65"/>
                 <outlet property="stopAllView" destination="85" id="87"/>
+                <outlet property="valueLb" destination="HEh-KF-iNh" id="daL-cG-pG9"/>
                 <outlet property="view" destination="2" id="3"/>
             </connections>
         </placeholder>
@@ -194,12 +198,40 @@
                     <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
-                <activityIndicatorView opaque="NO" contentMode="scaleToFill" animating="YES" style="gray" id="96">
-                    <rect key="frame" x="502" y="564" width="20" height="20"/>
+                <activityIndicatorView opaque="NO" contentMode="scaleToFill" hidesWhenStopped="YES" animating="YES" style="gray" id="96">
+                    <rect key="frame" x="502" y="555" width="20" height="20"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <color key="color" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                 </activityIndicatorView>
+                <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progressViewStyle="bar" id="PQu-CH-dWj">
+                    <rect key="frame" x="412" y="642" width="200" height="3"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="progressTintColor" red="0.91072944970000003" green="0.73447154790000002" blue="0.12715825710000001" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="trackTintColor" red="0.90474269699999998" green="0.90474269699999998" blue="0.90474269699999998" alpha="1" colorSpace="calibratedRGB"/>
+                </progressView>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="%" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="HTD-XT-rHa">
+                    <rect key="frame" x="527" y="606" width="30" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="正在加载数据" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="xKi-Nl-Yvd">
+                    <rect key="frame" x="0.0" y="580" width="1024" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="HEh-KF-iNh">
+                    <rect key="frame" x="439" y="606" width="82" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="blackOpaque"/>

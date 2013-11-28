@@ -14,6 +14,7 @@
     NSURLConnection *connect;
 }
 @property(nonatomic, strong)NSString *Name;
+@property(nonatomic, strong)NSString *urlStr;
 - (BOOL)loadMusicData:(NSString*)url musicName:(NSString*)musicName;
-
+- (BOOL)loadMenuFromUrl;
 @end

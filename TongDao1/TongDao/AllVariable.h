@@ -26,6 +26,15 @@ SCGIFImageView* gifImageView;
 UIImageView *playMusicImageV;
 BOOL playing;  // 音乐的播放状态
 
+BOOL AllLoad;
+BOOL AllOnceLoad;
+
 NSMutableArray *AllMusicQueAry;
+NSMutableDictionary *AllMovieInfoDict;
+long AllZipSize;
+long AllLoadLenght;
+
+long AllVideoSize;
+long AllLoadVideoLenght;
 
 #endif

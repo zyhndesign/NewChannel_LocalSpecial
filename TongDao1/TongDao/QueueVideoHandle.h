@@ -1,14 +1,14 @@
 //
-//  QueueZipHandle.h
-//  GYSJ
+//  QueueVideoHandle.h
+//  TongDao
 //
-//  Created by sunyong on 13-9-24.
+//  Created by sunyong on 13-11-28.
 //  Copyright (c) 2013年 sunyong. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 
-@interface QueueZipHandle : NSObject
+@interface QueueVideoHandle : NSObject
 {
     
 }

@@ -16,6 +16,9 @@
 #import "SCGIFImageView.h"
 #import "ContentView.h"
 #import "googleAnalytics/GAIDictionaryBuilder.h"
+#import "XMLParser.h"
+#import "LoadSimpleMovieNet.h"
+#import "QueueVideoHandle.h"
 
 @interface ViewController ()
 
@@ -23,7 +26,10 @@
 
 @implementation ViewController
 @synthesize otherContentV;
-
+@synthesize progressView;
+@synthesize implyLb;
+@synthesize valueLb;
+@synthesize charatLb;
 
 - (void)viewDidLoad
 {
@@ -48,7 +54,15 @@
     [QueueProHanle   init];
     [QueueZipHandle  init];
     
+    AllOnceLoad = YES;
+    valueLb.hidden = YES;
+    charatLb.hidden = YES;
+    progressView.hidden = YES;
+    
     AllMusicQueAry = [[NSMutableArray alloc] init];
+    videoArray     = [[NSMutableArray alloc] init];
+    AllMovieInfoDict = [[NSMutableDictionary alloc] init];
+    
     NSString *path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
     NSArray *array = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:[path stringByAppendingString:@"/music"] error:nil];
     [AllMusicQueAry addObjectsFromArray:array];
@@ -64,6 +78,7 @@
 {
     [_scrollView setContentSize:CGSizeMake(1024, PageSize*11)];
     //  _scrollView.pagingEnabled = YES;
+    allInfoArray = [[NSMutableArray alloc] init];
     homePageViewCtr  = [[HomePageViewContr alloc] init];
     [homePageViewCtr.view setFrame:CGRectMake(0, 0, homePageViewCtr.view.frame.size.width, homePageViewCtr.view.frame.size.height)];
     
@@ -108,6 +123,10 @@
     [playMusicImageV setFrame:CGRectMake(0, 0, 50, 50)];
     playMusicImageV.userInteractionEnabled = NO;
     [musicShowBt addSubview:playMusicImageV];
+    
+    implyLb.text = @"正在加载数据";
+    progressView.progressTintColor = RedColor;
+    progressView.trackTintColor = [UIColor lightGrayColor];
 }
 
 - (void)addMaskView
@@ -275,17 +294,18 @@ static BOOL handleScrol;
     NSArray *cateFiv = [LocalSQL getSectionData:@"13/17"];
     [LocalSQL closeDataBase];
     
+    [allInfoArray addObjectsFromArray:cateTwo];
+    [allInfoArray addObjectsFromArray:cateThr];
+    [allInfoArray addObjectsFromArray:cateFou];
+    [allInfoArray addObjectsFromArray:cateFiv];
+    
     [homePageViewCtr  loadSubview:cateOne];
     [landscapeViewCtr loadSubview:cateTwo];
     [humanityViewCtr  loadSubview:cateThr];
     [storyViewCtr     loadSubview:cateFou];
     [communityViewCtr loadSubview:cateFiv];
     
-    musicShowBt.hidden = NO;
-    
-    [launchImageV removeFromSuperview];
-    [activeView removeFromSuperview];
-    stopAllView.hidden = YES;
+    [self caculateLoadTask];
 }
 
 - (void)didReceiveErrorCode:(NSError *)ErrorDict
@@ -298,17 +318,212 @@ static BOOL handleScrol;
     NSArray *cateFiv = [LocalSQL getSectionData:@"13/17"];
     [LocalSQL closeDataBase];
     
+    [allInfoArray addObjectsFromArray:cateTwo];
+    [allInfoArray addObjectsFromArray:cateThr];
+    [allInfoArray addObjectsFromArray:cateFou];
+    [allInfoArray addObjectsFromArray:cateFiv];
+    
     [homePageViewCtr  loadSubview:cateOne];
     [landscapeViewCtr loadSubview:cateTwo];
     [humanityViewCtr  loadSubview:cateThr];
     [storyViewCtr     loadSubview:cateFou];
     [communityViewCtr loadSubview:cateFiv];
     
+    [self finishLoad];
+}
+
+- (void)caculateLoadTask
+{
+    AllLoad = YES;
+    
+    NSMutableArray *fileNameArray = [[NSMutableArray alloc] init];
+    
+    NSString *path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+    NSArray *array = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:path error:nil];
+    
+    [fileNameArray addObjectsFromArray:array];
+    [fileNameArray removeObject:@".DS_Store"];
+    [fileNameArray removeObject:@"BigImage"];
+    [fileNameArray removeObject:@"Data.db"];
+    [fileNameArray removeObject:@"movie"];
+    [fileNameArray removeObject:@"music"];
+    [fileNameArray removeObject:@"ProImage"];
+    
+    AllZipSize = 0;
+    AllLoadLenght = 0;
+    for (int i = 0; i < allInfoArray.count; i++)
+    {
+        NSDictionary *infoDict = [allInfoArray objectAtIndex:i];
+        NSString *idStr  = [infoDict objectForKey:@"id"];
+        NSString *videoS = [infoDict objectForKey:@"hasVideo"];
+        if (![self isEixstInArray:fileNameArray content:idStr])
+        {
+            int simpleSize = [[infoDict objectForKey:@"size"] intValue];
+            AllZipSize += simpleSize;
+            LoadZipFileNet *loadZipNet = [[LoadZipFileNet alloc] init];
+            loadZipNet.delegate = nil;
+            loadZipNet.urlStr   = [[infoDict objectForKey:@"url"] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+            loadZipNet.md5Str   = [[infoDict objectForKey:@"md5"] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+            loadZipNet.zipStr = [infoDict objectForKey:@"id"];
+            [QueueZipHandle addTarget:loadZipNet];
+        }
+        if([videoS isEqualToString:@"true"])
+        {
+            [videoArray addObject:infoDict];
+        }
+    }
+    [self caculateMovieLoad];
+}
+
+- (void)caculateMovieLoad
+{
+    AllVideoSize = 0;
+    AllLoadVideoLenght = 0;
+    NSMutableArray *fileNameArray = [[NSMutableArray alloc] init];
+    NSString *path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+    NSArray *array = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:[path stringByAppendingPathComponent:@"movie"] error:nil];
+    [fileNameArray addObjectsFromArray:array];
+    [fileNameArray removeObject:@".DS_Store"];
+    for (int i = 0; i < videoArray.count; i++)
+    {
+        NSDictionary *initDict = [videoArray objectAtIndex:i];
+        NSString *docXmlPath = [path stringByAppendingPathComponent:[NSString stringWithFormat:@"%@/doc.xml", [initDict objectForKey:@"id"]]];
+        [[XMLParser alloc] initWithFilePath:docXmlPath];
+    }
+    NSArray *valueArray = [AllMovieInfoDict allValues];
+    long existFileSize = 0;
+    for (int i = 0; i < valueArray.count; i++)
+    {
+        NSString *urlStr = [valueArray objectAtIndex:i];
+        NSArray *tempAry = [urlStr componentsSeparatedByString:@"/"];
+        
+        NSString *path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+        NSString *filePath = [path stringByAppendingPathComponent:[NSString stringWithFormat:@"movie/%@", [tempAry lastObject]]];
+        BOOL dirt = NO;
+        if ([[NSFileManager defaultManager] fileExistsAtPath:filePath isDirectory:&dirt])
+        {
+            NSDictionary *infoDict = [[NSFileManager defaultManager] attributesOfItemAtPath:filePath error:Nil];
+            long size = [infoDict fileSize];
+            existFileSize += size;
+        }
+        else
+        {
+            LoadSimpleMovieNet *loadMoiveNet = [[LoadSimpleMovieNet alloc] init];
+            loadMoiveNet.urlStr = urlStr;
+            loadMoiveNet.Name = [tempAry lastObject];
+            [QueueVideoHandle init];
+            [QueueVideoHandle addTarget:loadMoiveNet];
+        }
+    }
+    AllVideoSize -= existFileSize;
+    
+    if ([QueueVideoHandle isHaveTask] || [QueueZipHandle isHaveTask])
+    {
+        UIAlertView *alerView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"有新数据更新，是否一键下载" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:@"取消", nil];
+        [alerView show];
+    }
+    else
+    {
+        [self finishLoad];
+    }
+}
+
+- (void)startLoadMovie
+{
+    NSString *implyStr = nil;
+    [progressView setProgress:0.0 animated:NO];
+    if (AllVideoSize/1024/1024/1024 >= 1)
+    {
+        implyStr = [NSString stringWithFormat:@"%0.2fG", AllVideoSize/1024.0/1024.0/1024.0];
+    }
+    else if (AllVideoSize/1024/1024 >= 1)
+    {
+        implyStr = [NSString stringWithFormat:@"%0.2fMB", AllVideoSize/1024.0/1024.0];
+    }
+    else
+    {
+        implyStr = [NSString stringWithFormat:@"%0.2fKB", AllVideoSize/1024.0];
+    }
+    implyLb.text = [NSString stringWithFormat:@"正在下载新的视频数据，共有%@，请耐心等候!", implyStr];
+    [QueueVideoHandle startTask];
+}
+
+- (BOOL)isEixstInArray:(NSArray*)initAry content:(NSString*)contentStr
+{
+    for (int i = 0; i < initAry.count; i++)
+    {
+        NSString *infoStr = [initAry objectAtIndex:i];
+        if ([infoStr isEqualToString:contentStr])
+        {
+            return YES;
+        }
+    }
+    return NO;
+}
+
+- (void)finishLoad
+{
+    AllOnceLoad = NO;
     musicShowBt.hidden = NO;
     [launchImageV removeFromSuperview];
     [activeView   removeFromSuperview];
     stopAllView.hidden = YES;
+    [progressView removeFromSuperview];
+    [valueLb removeFromSuperview];
+    [charatLb removeFromSuperview];
+    [implyLb removeFromSuperview];
 }
 
+#pragma mark - alertView delegate
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 0)
+    {
+        [activeView stopAnimating];
+        valueLb.hidden      = NO;
+        charatLb.hidden     = NO;
+        progressView.hidden = NO;
+        if ([QueueZipHandle isHaveTask])
+        {
+            [QueueZipHandle startTask];
+            NSString *implyStr = nil;
+            if (AllZipSize/1024/1024/1024 >= 1)
+            {
+                implyStr = [NSString stringWithFormat:@"%0.2fG", AllZipSize/1024.0/1024.0/1024.0];
+            }
+            else if (AllZipSize/1024/1024 >= 1)
+            {
+                implyStr = [NSString stringWithFormat:@"%0.2fMB", AllZipSize/1024.0/1024.0];
+            }
+            else
+            {
+                implyStr = [NSString stringWithFormat:@"%0.2fKB", AllZipSize/1024.0];
+            }
+            implyLb.text = [NSString stringWithFormat:@"正在下载新的文章数据，共有%@，请耐心等候!", implyStr];
+        }
+        else
+        {
+            [QueueVideoHandle startTask];
+            NSString *implyStr = nil;
+            if (AllVideoSize/1024/1024/1024 >= 1)
+            {
+                implyStr = [NSString stringWithFormat:@"%0.2fG", AllVideoSize/1024.0/1024.0/1024.0];
+            }
+            else if (AllVideoSize/1024/1024 >= 1)
+            {
+                implyStr = [NSString stringWithFormat:@"%0.2fMB", AllVideoSize/1024.0/1024.0];
+            }
+            else
+            {
+                implyStr = [NSString stringWithFormat:@"%0.2fKB", AllVideoSize/1024.0];
+            }
+            implyLb.text = [NSString stringWithFormat:@"正在下载新的视频数据，共有%@，请耐心等候!", implyStr];
+        }
+    }
+    else
+    {
+        [self finishLoad];
+    }
+}
 
 @end

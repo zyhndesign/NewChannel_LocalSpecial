@@ -19,7 +19,7 @@
 #import "GAITrackedViewController.h"
 #import "GAI.h"
 
-@interface ViewController : GAITrackedViewController<NetworkDelegate, UIScrollViewDelegate>
+@interface ViewController : GAITrackedViewController<NetworkDelegate, UIScrollViewDelegate, NSXMLParserDelegate, UIAlertViewDelegate>
 {
     IBOutlet UIScrollView *_scrollView;
     HomePageViewContr *homePageViewCtr;
@@ -29,6 +29,9 @@
     CommunityViewContr *communityViewCtr;
     AudioPlayerViewCtr *audioPlayViewCtr;
     VersionViewContr *versionViewCtr;
+    
+    
+    NSMutableArray *allInfoArray;
     
     UIButton *CurrentBt;
     
@@ -43,10 +46,21 @@
     IBOutlet UIActivityIndicatorView *activeView;
     
     BOOL isCloseMenuScrol;
+    
+    NSMutableArray *videoArray;
 }
-@property(nonatomic, assign)IBOutlet UIView *otherContentV;
+@property(nonatomic, strong)IBOutlet UIView *otherContentV;
+@property(nonatomic, strong)IBOutlet UIProgressView *progressView;
+@property(nonatomic, strong)IBOutlet UILabel *valueLb;
+@property(nonatomic, strong)IBOutlet UILabel *charatLb;
+@property(nonatomic, strong)IBOutlet UILabel *implyLb;
+
 - (IBAction)selectMenu:(UIButton*)sender;
 - (IBAction)musicShow:(UIButton*)sender;
 - (void)imageScaleShow:(NSString*)imageUrl;
 - (void)presentViewContr:(NSDictionary*)_infoDict;
+
+- (void)caculateMovieLoad;
+- (void)startLoadMovie;
+- (void)finishLoad;
 @end
