@@ -23,6 +23,11 @@ static __strong NSMutableArray *allTaskAry;
     }
 }
 
++ (void)clear
+{
+    [allTaskAry removeAllObjects];
+}
+
 + (BOOL)isHaveTask
 {
     if (allTaskAry.count > 0) {

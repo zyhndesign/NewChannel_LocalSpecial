@@ -18,6 +18,10 @@
     [xmlParser parse];
 }
 
++ (void)clear
+{
+    [AllMovieInfoDict removeAllObjects];
+}
 #pragma mark - xmlParser delegate
 
 - (void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName attributes:(NSDictionary *)attributeDict

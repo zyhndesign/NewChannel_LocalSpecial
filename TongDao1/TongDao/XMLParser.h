@@ -17,5 +17,5 @@
 }
 
 - (void)initWithFilePath:(NSString*)filePath;
-
++ (void)clear;
 @end

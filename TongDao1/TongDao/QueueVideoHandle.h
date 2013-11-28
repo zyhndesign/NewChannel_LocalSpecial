@@ -13,6 +13,7 @@
     
 }
 + (void)init;
++ (void)clear;
 + (void)addTarget:(id)target;
 + (void)taskFinish:(id)target;
 + (BOOL)isHaveTask;

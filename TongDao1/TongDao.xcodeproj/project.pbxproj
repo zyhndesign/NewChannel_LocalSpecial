@@ -768,12 +768,12 @@
 				D38A15D01807CCEA00AEDF98 /* QueueZipHandle.m */,
 				D3EDACC418471FA500CD62B7 /* QueueVideoHandle.h */,
 				D3EDACC518471FA500CD62B7 /* QueueVideoHandle.m */,
+				D3EDACC11846F9B700CD62B7 /* XMLParser.h */,
+				D3EDACC21846F9B700CD62B7 /* XMLParser.m */,
 				D343236717E5A24100F6B5E5 /* LocalSQL.h */,
 				D343236817E5A24100F6B5E5 /* LocalSQL.m */,
 				D3EDACBE1846EA7A00CD62B7 /* QueueOnceLoaderZip.h */,
 				D3EDACBF1846EA7A00CD62B7 /* QueueOnceLoaderZip.m */,
-				D3EDACC11846F9B700CD62B7 /* XMLParser.h */,
-				D3EDACC21846F9B700CD62B7 /* XMLParser.m */,
 			);
 			name = DataBase;
 			sourceTree = "<group>";

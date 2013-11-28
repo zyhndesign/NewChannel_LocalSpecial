@@ -62,6 +62,7 @@
     AllMusicQueAry = [[NSMutableArray alloc] init];
     videoArray     = [[NSMutableArray alloc] init];
     AllMovieInfoDict = [[NSMutableDictionary alloc] init];
+    allInfoArray = [[NSMutableArray alloc] init];
     
     NSString *path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
     NSArray *array = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:[path stringByAppendingString:@"/music"] error:nil];
@@ -78,7 +79,6 @@
 {
     [_scrollView setContentSize:CGSizeMake(1024, PageSize*11)];
     //  _scrollView.pagingEnabled = YES;
-    allInfoArray = [[NSMutableArray alloc] init];
     homePageViewCtr  = [[HomePageViewContr alloc] init];
     [homePageViewCtr.view setFrame:CGRectMake(0, 0, homePageViewCtr.view.frame.size.width, homePageViewCtr.view.frame.size.height)];
     
@@ -330,6 +330,8 @@ static BOOL handleScrol;
     [communityViewCtr loadSubview:cateFiv];
     
     [self finishLoad];
+    UIAlertView *alerView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"网络数据有误，请检查网络连接" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:@"取消", nil];
+    [alerView show];
 }
 
 - (void)caculateLoadTask
@@ -379,6 +381,9 @@ static BOOL handleScrol;
 {
     AllVideoSize = 0;
     AllLoadVideoLenght = 0;
+    [AllMovieInfoDict removeAllObjects];
+    [QueueVideoHandle clear];
+    [XMLParser clear];
     NSMutableArray *fileNameArray = [[NSMutableArray alloc] init];
     NSString *path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
     NSArray *array = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:[path stringByAppendingPathComponent:@"movie"] error:nil];
@@ -417,14 +422,26 @@ static BOOL handleScrol;
     }
     AllVideoSize -= existFileSize;
     
-    if ([QueueVideoHandle isHaveTask] || [QueueZipHandle isHaveTask])
+    static BOOL Once = NO;
+    if (!Once)
     {
-        UIAlertView *alerView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"有新数据更新，是否一键下载" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:@"取消", nil];
-        [alerView show];
+        Once = YES;
+        if ([QueueVideoHandle isHaveTask] || [QueueZipHandle isHaveTask])
+        {
+            UIAlertView *alerView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"有新数据更新，是否一键下载" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:@"取消", nil];
+            [alerView show];
+        }
+        else
+        {
+            [self finishLoad];
+        }
     }
     else
     {
-        [self finishLoad];
+        if ([QueueVideoHandle isHaveTask])
+        {
+            [self startLoadMovie];
+        }
     }
 }
 
@@ -472,6 +489,10 @@ static BOOL handleScrol;
     [valueLb removeFromSuperview];
     [charatLb removeFromSuperview];
     [implyLb removeFromSuperview];
+    progressView = nil;
+    valueLb = nil;
+    charatLb = nil;
+    implyLb = nil;
 }
 
 #pragma mark - alertView delegate

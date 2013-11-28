@@ -112,7 +112,7 @@ static int position;
     }
     else
     {
-        [RootViewContr startLoadMovie];
+        [RootViewContr caculateMovieLoad];
     };
 }
 

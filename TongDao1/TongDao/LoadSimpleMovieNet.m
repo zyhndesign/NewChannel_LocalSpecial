@@ -43,8 +43,13 @@
 {
     NSString *path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
     NSString *filePath = [path stringByAppendingPathComponent:[NSString stringWithFormat:@"movie/%@", musicName]];
+    NSString *filePathEncode = [path stringByAppendingPathComponent:[NSString stringWithFormat:@"movie/%@", [musicName stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]];
     BOOL dirt = NO;
     if ([[NSFileManager defaultManager] fileExistsAtPath:filePath isDirectory:&dirt])
+    {
+        return YES;
+    }
+    if ([[NSFileManager defaultManager] fileExistsAtPath:filePathEncode isDirectory:&dirt])
     {
         return YES;
     }

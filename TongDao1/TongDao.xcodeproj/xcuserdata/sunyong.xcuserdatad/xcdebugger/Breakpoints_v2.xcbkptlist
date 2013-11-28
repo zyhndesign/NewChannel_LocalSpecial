@@ -9,13 +9,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "TongDao/XMLParser.m"
-            timestampString = "407314883.319272"
+            filePath = "TongDao/QueueZipHandle.m"
+            timestampString = "407328124.122171"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "62"
-            endingLineNumber = "62"
-            landmarkName = "-parser:didEndElement:namespaceURI:qualifiedName:"
+            startingLineNumber = "115"
+            endingLineNumber = "115"
+            landmarkName = "+taskFinish:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -25,29 +25,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "TongDao/ViewController.m"
-            timestampString = "407323771.140164"
+            filePath = "TongDao/QueueZipHandle.m"
+            timestampString = "407328248.782488"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "419"
-            endingLineNumber = "419"
-            landmarkName = "-caculateMovieLoad"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "TongDao/LoadZipFileNet.m"
-            timestampString = "407325101.404653"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "82"
-            endingLineNumber = "82"
-            landmarkName = "-connection:didReceiveData:"
+            startingLineNumber = "107"
+            endingLineNumber = "107"
+            landmarkName = "+taskFinish:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
