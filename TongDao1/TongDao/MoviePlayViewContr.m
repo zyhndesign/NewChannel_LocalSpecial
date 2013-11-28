@@ -69,7 +69,7 @@
     }
     else
     {
-        movie = [[MPMoviePlayerController alloc] initWithContentURL:[NSURL URLWithString:urlStr]];
+        movie = [[MPMoviePlayerController alloc] initWithContentURL:[NSURL URLWithString:[urlStr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]];
         movie.controlStyle = MPMovieControlStyleFullscreen;
         movie.scalingMode  = MPMovieScalingModeAspectFill;
         [movie.view setFrame:self.view.bounds];
