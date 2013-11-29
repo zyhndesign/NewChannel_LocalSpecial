@@ -18,6 +18,8 @@
     
     BOOL isMusicPlay;
     NSTimer *timerURL;
+    
+    BOOL isLocalMovieFile;
 }
 
 - (id)initwithURL:(NSString*)URLStr;

@@ -54,13 +54,15 @@
 - (void)moviePlay
 {
     NSArray *tempAry = [urlStr componentsSeparatedByString:@"/"];
-    
+
     LoadSimpleMovieNet *loadMoiveNet = [[LoadSimpleMovieNet alloc] init];
     
     if([loadMoiveNet loadMusicData:[urlStr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] musicName:[tempAry lastObject]])
     {
         NSString *path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
         NSString *filePath = [path stringByAppendingPathComponent:[NSString stringWithFormat:@"movie/%@", [tempAry lastObject]]];
+        
+        isLocalMovieFile = YES;
         
         movie = [[MPMoviePlayerController alloc] initWithContentURL:[NSURL fileURLWithPath:filePath]];
         movie.controlStyle = MPMovieControlStyleFullscreen;
@@ -155,7 +157,14 @@
             [timerURL invalidate];
             timerURL = nil;
         }
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"无法链接到视频，请检查网络设置。" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+        if (isLocalMovieFile)
+        {
+            NSArray *tempAry = [urlStr componentsSeparatedByString:@"/"];
+            NSString *path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+            NSString *filePath = [path stringByAppendingPathComponent:[NSString stringWithFormat:@"movie/%@", [tempAry lastObject]]];
+            [[NSFileManager defaultManager] removeItemAtPath:filePath error:nil];
+        }
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"视频文件有误" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
         [alertView show];
         [alertView release];
     }
