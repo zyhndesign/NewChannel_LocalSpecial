@@ -84,8 +84,8 @@
     {
         ContentView *contentVC = (ContentView*)delegate;
         contentVC.progressV.progress = [backData length]/zipSize;
-        int value = [backData length]/zipSize * 100;
-        contentVC.proValueLb.text = [NSString stringWithFormat:@"%2d", value];
+        int value = [backData length]*100.0/zipSize ;
+        contentVC.proValueLb.text = [NSString stringWithFormat:@"%d", value];
     }
     else
     {

@@ -330,7 +330,7 @@ static BOOL handleScrol;
     [communityViewCtr loadSubview:cateFiv];
     
     [self finishLoad];
-    UIAlertView *alerView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"网络数据有误，请检查网络连接" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:@"取消", nil];
+    UIAlertView *alerView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"网络数据有误，请检查网络连接" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
     [alerView show];
 }
 
@@ -395,6 +395,11 @@ static BOOL handleScrol;
         NSString *docXmlPath = [path stringByAppendingPathComponent:[NSString stringWithFormat:@"%@/doc.xml", [initDict objectForKey:@"id"]]];
         [[XMLParser alloc] initWithFilePath:docXmlPath];
     }
+    [self performSelector:@selector(goOnCaculateMovieLoader) withObject:nil afterDelay:0.5f];
+}
+
+- (void)goOnCaculateMovieLoader
+{
     NSArray *valueArray = [AllMovieInfoDict allValues];
     long existFileSize = 0;
     for (int i = 0; i < valueArray.count; i++)
@@ -438,7 +443,7 @@ static BOOL handleScrol;
     }
     else
     {
-        if ([QueueVideoHandle isHaveTask])
+        if ([QueueVideoHandle isHaveTask] && AllVideoSize > 0)
         {
             [self startLoadMovie];
         }

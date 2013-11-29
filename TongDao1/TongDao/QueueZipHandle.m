@@ -57,15 +57,13 @@ static int position;
         LoadZipFileNet *currentProNet = target;
         if ([tempProNet.urlStr isEqualToString:currentProNet.urlStr])
         {
-            
+        
         }
         else
         {
-            LoadZipFileNet *tempProNet = (LoadZipFileNet*)[allTaskAry lastObject];
             [tempProNet cancelLoad];
             [allTaskAry exchangeObjectAtIndex:position withObjectAtIndex:allTaskAry.count-1];
-            tempProNet = (LoadZipFileNet*)[allTaskAry lastObject];
-            [tempProNet loadMenuFromUrl];
+            [currentProNet loadMenuFromUrl];
         }
         return;
     }
