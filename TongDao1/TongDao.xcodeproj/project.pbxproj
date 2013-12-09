@@ -62,6 +62,8 @@
 		D343238817E5B0E000F6B5E5 /* CommunityViewContr.m in Sources */ = {isa = PBXBuildFile; fileRef = D343238617E5B0E000F6B5E5 /* CommunityViewContr.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		D343238917E5B0E000F6B5E5 /* CommunityViewContr.xib in Resources */ = {isa = PBXBuildFile; fileRef = D343238717E5B0E000F6B5E5 /* CommunityViewContr.xib */; };
 		D364C3FA1823477400B0AF78 /* GetVersion.m in Sources */ = {isa = PBXBuildFile; fileRef = D364C3F91823477400B0AF78 /* GetVersion.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		D36F0564185563E6003D7EFD /* LoaderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D36F0562185563E6003D7EFD /* LoaderViewController.m */; };
+		D36F0565185563E6003D7EFD /* LoaderViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D36F0563185563E6003D7EFD /* LoaderViewController.xib */; };
 		D37DB57418443F21006C0A57 /* LoadSimpleMusicNet.m in Sources */ = {isa = PBXBuildFile; fileRef = D37DB57318443F21006C0A57 /* LoadSimpleMusicNet.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		D37DB57718447E10006C0A57 /* LoadSimpleMovieNet.m in Sources */ = {isa = PBXBuildFile; fileRef = D37DB57618447E10006C0A57 /* LoadSimpleMovieNet.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		D37DB57918449905006C0A57 /* 03Shange.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D37DB57818449905006C0A57 /* 03Shange.mp3 */; };
@@ -308,6 +310,9 @@
 		D343238717E5B0E000F6B5E5 /* CommunityViewContr.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommunityViewContr.xib; sourceTree = "<group>"; };
 		D364C3F81823477400B0AF78 /* GetVersion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetVersion.h; sourceTree = "<group>"; };
 		D364C3F91823477400B0AF78 /* GetVersion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetVersion.m; sourceTree = "<group>"; };
+		D36F0561185563E6003D7EFD /* LoaderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoaderViewController.h; sourceTree = "<group>"; };
+		D36F0562185563E6003D7EFD /* LoaderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoaderViewController.m; sourceTree = "<group>"; };
+		D36F0563185563E6003D7EFD /* LoaderViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoaderViewController.xib; sourceTree = "<group>"; };
 		D37DB57218443F21006C0A57 /* LoadSimpleMusicNet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadSimpleMusicNet.h; sourceTree = "<group>"; };
 		D37DB57318443F21006C0A57 /* LoadSimpleMusicNet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoadSimpleMusicNet.m; sourceTree = "<group>"; };
 		D37DB57518447E10006C0A57 /* LoadSimpleMovieNet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadSimpleMovieNet.h; sourceTree = "<group>"; };
@@ -734,6 +739,9 @@
 				D3057EA317E823BC00505C69 /* VersionViewContr.h */,
 				D3057EA417E823BC00505C69 /* VersionViewContr.m */,
 				D3057EA517E823BC00505C69 /* VersionViewContr.xib */,
+				D36F0561185563E6003D7EFD /* LoaderViewController.h */,
+				D36F0562185563E6003D7EFD /* LoaderViewController.m */,
+				D36F0563185563E6003D7EFD /* LoaderViewController.xib */,
 			);
 			name = MainType;
 			sourceTree = "<group>";
@@ -1128,6 +1136,7 @@
 				D343237F17E5B08F00F6B5E5 /* HumanityViewContr.xib in Resources */,
 				D3D6E3811842F80C001E3621 /* music_btn_next_normal.png in Resources */,
 				D3D6E3CF1842F80C001E3621 /* section_title_fengjin@2x.png in Resources */,
+				D36F0565185563E6003D7EFD /* LoaderViewController.xib in Resources */,
 				D3D6E3871842F80C001E3621 /* music_btn_previous_normal.png in Resources */,
 				D3D6E36D1842F80C001E3621 /* bg2.jpg in Resources */,
 				D3065EED183A29CC003A6FB1 /* icon_144.png in Resources */,
@@ -1253,6 +1262,7 @@
 				D308827317E5467B00F24817 /* ViewController.m in Sources */,
 				D3F346781808E2BE00479AC8 /* ContentView.m in Sources */,
 				D3EDACC618471FA500CD62B7 /* QueueVideoHandle.m in Sources */,
+				D36F0564185563E6003D7EFD /* LoaderViewController.m in Sources */,
 				D308828117E5485800F24817 /* MFSP_MD5.m in Sources */,
 				D308828517E5486F00F24817 /* ZipArchive.mm in Sources */,
 				D3EDACC31846F9B700CD62B7 /* XMLParser.m in Sources */,
