@@ -104,6 +104,9 @@
     [_scrollView addSubview:communityViewCtr.view];
     [_scrollView addSubview:versionViewCtr.view];
     
+    loaderViewContr = [[LoaderViewController alloc] init];
+    [self.view addSubview:loaderViewContr.view];
+    
     LoadMenuInfoNet *loadMenuInfoNet = [[LoadMenuInfoNet alloc] init];
     loadMenuInfoNet.delegate = self;
     [loadMenuInfoNet loadMenuFromUrl];

@@ -62,7 +62,7 @@
 		D343238817E5B0E000F6B5E5 /* CommunityViewContr.m in Sources */ = {isa = PBXBuildFile; fileRef = D343238617E5B0E000F6B5E5 /* CommunityViewContr.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		D343238917E5B0E000F6B5E5 /* CommunityViewContr.xib in Resources */ = {isa = PBXBuildFile; fileRef = D343238717E5B0E000F6B5E5 /* CommunityViewContr.xib */; };
 		D364C3FA1823477400B0AF78 /* GetVersion.m in Sources */ = {isa = PBXBuildFile; fileRef = D364C3F91823477400B0AF78 /* GetVersion.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		D36F0564185563E6003D7EFD /* LoaderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D36F0562185563E6003D7EFD /* LoaderViewController.m */; };
+		D36F0564185563E6003D7EFD /* LoaderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D36F0562185563E6003D7EFD /* LoaderViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		D36F0565185563E6003D7EFD /* LoaderViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D36F0563185563E6003D7EFD /* LoaderViewController.xib */; };
 		D37DB57418443F21006C0A57 /* LoadSimpleMusicNet.m in Sources */ = {isa = PBXBuildFile; fileRef = D37DB57318443F21006C0A57 /* LoadSimpleMusicNet.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		D37DB57718447E10006C0A57 /* LoadSimpleMovieNet.m in Sources */ = {isa = PBXBuildFile; fileRef = D37DB57618447E10006C0A57 /* LoadSimpleMovieNet.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
@@ -605,6 +605,9 @@
 				D308827417E5467B00F24817 /* ViewController.xib */,
 				D324715417F30C340049BF9B /* SCGIFImageView.h */,
 				D324715517F30C340049BF9B /* SCGIFImageView.m */,
+				D36F0561185563E6003D7EFD /* LoaderViewController.h */,
+				D36F0562185563E6003D7EFD /* LoaderViewController.m */,
+				D36F0563185563E6003D7EFD /* LoaderViewController.xib */,
 			);
 			name = Main;
 			sourceTree = "<group>";
@@ -739,9 +742,6 @@
 				D3057EA317E823BC00505C69 /* VersionViewContr.h */,
 				D3057EA417E823BC00505C69 /* VersionViewContr.m */,
 				D3057EA517E823BC00505C69 /* VersionViewContr.xib */,
-				D36F0561185563E6003D7EFD /* LoaderViewController.h */,
-				D36F0562185563E6003D7EFD /* LoaderViewController.m */,
-				D36F0563185563E6003D7EFD /* LoaderViewController.xib */,
 			);
 			name = MainType;
 			sourceTree = "<group>";

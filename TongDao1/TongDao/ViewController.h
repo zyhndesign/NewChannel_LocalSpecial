@@ -15,6 +15,7 @@
 #import "LoadMenuInfoNet.h"
 #import "AudioPlayerViewCtr.h"
 #import "VersionViewContr.h"
+#import "LoaderViewController.h"
 
 #import "GAITrackedViewController.h"
 #import "GAI.h"
@@ -29,7 +30,7 @@
     CommunityViewContr *communityViewCtr;
     AudioPlayerViewCtr *audioPlayViewCtr;
     VersionViewContr *versionViewCtr;
-    
+    LoaderViewController *loaderViewContr;
     
     NSMutableArray *allInfoArray;
     
