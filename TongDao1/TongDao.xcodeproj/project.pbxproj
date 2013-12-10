@@ -64,6 +64,7 @@
 		D364C3FA1823477400B0AF78 /* GetVersion.m in Sources */ = {isa = PBXBuildFile; fileRef = D364C3F91823477400B0AF78 /* GetVersion.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		D36F0564185563E6003D7EFD /* LoaderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D36F0562185563E6003D7EFD /* LoaderViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		D36F0565185563E6003D7EFD /* LoaderViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D36F0563185563E6003D7EFD /* LoaderViewController.xib */; };
+		D36F05691855B267003D7EFD /* SimpleQueSceneHandle.m in Sources */ = {isa = PBXBuildFile; fileRef = D36F05681855B267003D7EFD /* SimpleQueSceneHandle.m */; };
 		D37DB57418443F21006C0A57 /* LoadSimpleMusicNet.m in Sources */ = {isa = PBXBuildFile; fileRef = D37DB57318443F21006C0A57 /* LoadSimpleMusicNet.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		D37DB57718447E10006C0A57 /* LoadSimpleMovieNet.m in Sources */ = {isa = PBXBuildFile; fileRef = D37DB57618447E10006C0A57 /* LoadSimpleMovieNet.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		D37DB57918449905006C0A57 /* 03Shange.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D37DB57818449905006C0A57 /* 03Shange.mp3 */; };
@@ -313,6 +314,8 @@
 		D36F0561185563E6003D7EFD /* LoaderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoaderViewController.h; sourceTree = "<group>"; };
 		D36F0562185563E6003D7EFD /* LoaderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoaderViewController.m; sourceTree = "<group>"; };
 		D36F0563185563E6003D7EFD /* LoaderViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoaderViewController.xib; sourceTree = "<group>"; };
+		D36F05671855B267003D7EFD /* SimpleQueSceneHandle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleQueSceneHandle.h; sourceTree = "<group>"; };
+		D36F05681855B267003D7EFD /* SimpleQueSceneHandle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleQueSceneHandle.m; sourceTree = "<group>"; };
 		D37DB57218443F21006C0A57 /* LoadSimpleMusicNet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadSimpleMusicNet.h; sourceTree = "<group>"; };
 		D37DB57318443F21006C0A57 /* LoadSimpleMusicNet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoadSimpleMusicNet.m; sourceTree = "<group>"; };
 		D37DB57518447E10006C0A57 /* LoadSimpleMovieNet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadSimpleMovieNet.h; sourceTree = "<group>"; };
@@ -615,6 +618,7 @@
 		D308827D17E5483700F24817 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				D36F05661855B1E6003D7EFD /* SimpleQue */,
 				D3DF2A8B18310269004B1C8F /* googleAnalytics */,
 				D30882A717E548BA00F24817 /* Net */,
 				D38A15CA1807CCC700AEDF98 /* DataBase */,
@@ -765,6 +769,15 @@
 				D3057EB617E8323000505C69 /* ActiveView.m */,
 			);
 			name = SimpleView;
+			sourceTree = "<group>";
+		};
+		D36F05661855B1E6003D7EFD /* SimpleQue */ = {
+			isa = PBXGroup;
+			children = (
+				D36F05671855B267003D7EFD /* SimpleQueSceneHandle.h */,
+				D36F05681855B267003D7EFD /* SimpleQueSceneHandle.m */,
+			);
+			name = SimpleQue;
 			sourceTree = "<group>";
 		};
 		D38A15CA1807CCC700AEDF98 /* DataBase */ = {
@@ -1276,6 +1289,7 @@
 				D30882A617E5489700F24817 /* CJSONScanner.m in Sources */,
 				D56B787C17E55E8D005DA29F /* ioapi.c in Sources */,
 				D56B787D17E55E8D005DA29F /* mztools.c in Sources */,
+				D36F05691855B267003D7EFD /* SimpleQueSceneHandle.m in Sources */,
 				D56B787E17E55E8D005DA29F /* unzip.c in Sources */,
 				D56B787F17E55E8D005DA29F /* zip.c in Sources */,
 				D343235F17E593A300F6B5E5 /* LoadMenuInfoNet.m in Sources */,

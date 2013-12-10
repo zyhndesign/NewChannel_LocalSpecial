@@ -40,7 +40,6 @@
     
     // Send the screen view.
     [[GAI sharedInstance].defaultTracker send:[[GAIDictionaryBuilder createAppView] build]];
-    
     [super viewDidLoad];
     
     [activeView startAnimating];
@@ -59,10 +58,11 @@
     charatLb.hidden = YES;
     progressView.hidden = YES;
     
-    AllMusicQueAry = [[NSMutableArray alloc] init];
-    videoArray     = [[NSMutableArray alloc] init];
-    AllMovieInfoDict = [[NSMutableDictionary alloc] init];
-    allInfoArray = [[NSMutableArray alloc] init];
+    AllMusicQueAry    = [[NSMutableArray alloc] init];
+    videoArray        = [[NSMutableArray alloc] init];
+    AllMovieInfoDict  = [[NSMutableDictionary alloc] init];
+    allInfoArray      = [[NSMutableArray alloc] init];
+    AllGroupInfoArray = [[NSMutableArray alloc] init];
     
     NSString *path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
     NSArray *array = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:[path stringByAppendingString:@"/music"] error:nil];
@@ -301,6 +301,11 @@ static BOOL handleScrol;
     [allInfoArray addObjectsFromArray:cateThr];
     [allInfoArray addObjectsFromArray:cateFou];
     [allInfoArray addObjectsFromArray:cateFiv];
+    
+    [AllGroupInfoArray addObject:cateTwo];
+    [AllGroupInfoArray addObject:cateThr];
+    [AllGroupInfoArray addObject:cateFou];
+    [AllGroupInfoArray addObject:cateFiv];
     
     [homePageViewCtr  loadSubview:cateOne];
     [landscapeViewCtr loadSubview:cateTwo];

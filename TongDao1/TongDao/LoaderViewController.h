@@ -14,11 +14,16 @@
     IBOutlet UIView *menuView;
     IBOutlet UIView *loadProgresView;
     
-    IBOutlet UILabel *progresLb;
+    IBOutlet UILabel *allProgresLb;
+    UILabel *currentLoadProLb;
     
     UIScrollView *menuScrolV;
     UIScrollView *progresScrolV;
     NSMutableArray *menuAry;
+    
+    NSMutableArray *swViewAry;
+    NSMutableArray *LocalFileNameArray;
+    NSMutableArray *videoArray;
 }
 
 - (IBAction)changeView:(UIButton*)sender;
