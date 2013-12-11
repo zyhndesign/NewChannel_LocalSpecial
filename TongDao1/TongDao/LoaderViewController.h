@@ -23,7 +23,6 @@
     
     NSMutableArray *swViewAry;
     NSMutableArray *LocalFileNameArray;
-    NSMutableArray *videoArray;
 }
 
 - (IBAction)changeView:(UIButton*)sender;

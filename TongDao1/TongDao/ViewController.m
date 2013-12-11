@@ -25,6 +25,7 @@
 @end
 
 @implementation ViewController
+@synthesize videoArray;
 @synthesize otherContentV;
 @synthesize progressView;
 @synthesize implyLb;

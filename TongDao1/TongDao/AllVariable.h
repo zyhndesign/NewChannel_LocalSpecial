@@ -20,9 +20,9 @@
 @class LoaderViewController;
 
 ViewController *RootViewContr;
-AudioPlayerViewCtr *AllAudioPlayViewCtr;
-LoaderViewController *AllLoaderViewContr;
-NSMutableArray *AllGroupInfoArray;
+AudioPlayerViewCtr *AllAudioPlayViewCtr;  /// 音乐VC
+LoaderViewController *AllLoaderViewContr;   //
+NSMutableArray *AllGroupInfoArray;  // 存放所有区下载的任务相关的数据，但视频数据临时计算
 UIScrollView *AllScrollView;
 int AllOnlyShowPresentOne;  // 只能同时展开一个详细内容
 SCGIFImageView* gifImageView;

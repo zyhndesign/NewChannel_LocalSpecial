@@ -17,6 +17,7 @@
 #import "SimpleQueHumeHandle.h"
 #import "SimpleQueStoryHandle.h"
 #import "SimpleQueCommunHandle.h"
+#import "SimpleQueVideoHandle.h"
 
 @implementation SimpleQueMusicHandle
 static __strong NSMutableArray *allTaskAry;
@@ -31,6 +32,7 @@ static BOOL Loading;
     {
         LoadSimpleMusicNet *tempProNet = [allTaskAry lastObject];
         [tempProNet cancelLoad];
+        [SimpleQueVideoHandle startTask];
     }
     Loading = NO;
     [allTaskAry removeAllObjects];
@@ -187,7 +189,16 @@ static BOOL Loading;
     {
         [SimpleQueCommunHandle startTask];
     }
-    else ;
+    else if([SimpleQueMusicHandle getStatus])
+    {
+        [SimpleQueMusicHandle startTask];
+    }
+    else
+    {
+        //////视频
+        [SimpleQueVideoHandle startTask];
+        NSLog(@"开始视频");
+    };
 }
 
 

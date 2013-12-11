@@ -106,7 +106,6 @@
         RootViewContr.progressView.progress = AllLoadLenght*1.0/AllZipSize;
     }
     [TaskClass setCurrentLenght:[data length]];
-
 }
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection

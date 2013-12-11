@@ -10,10 +10,31 @@
 #import "QueueVideoHandle.h"
 #import "AllVariable.h"
 #import "ViewController.h"
+#import "SimpleQueVideoHandle.h"
 
 @implementation LoadSimpleMovieNet
 @synthesize Name;
 @synthesize urlStr;
+
+/**
+ * version 2.0
+ */
+- (id)initWithClass:(Class)TClass
+{
+    self = [super init];
+    if (self) {
+        TaskClass = TClass;
+    }
+    return self;
+}
+
+- (void)cancelLoad
+{
+    if (connect)
+        [connect cancel];
+}
+
+////////////////////////////////////////////////
 
 - (BOOL)loadMenuFromUrl
 {
@@ -22,7 +43,7 @@
     BOOL dirt = NO;
     if ([[NSFileManager defaultManager] fileExistsAtPath:filePath isDirectory:&dirt])
     {
-        [QueueVideoHandle taskFinish:self];
+        [TaskClass taskFinish:self];
         return YES;
     }
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:[urlStr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]] cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:60.0f];
@@ -71,12 +92,7 @@
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
 {
     [backData appendData:data];
-    if (AllOnceLoad)
-    {
-        AllLoadVideoLenght += [data length];
-        RootViewContr.valueLb.text = [NSString stringWithFormat:@"%0.2f", AllLoadVideoLenght*100.0/AllVideoSize];
-        RootViewContr.progressView.progress = AllLoadVideoLenght*1.0/AllVideoSize;
-    }
+    [TaskClass setCurrentLenght:[data length]];
 }
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection
@@ -85,12 +101,13 @@
     NSString *filePath = [path stringByAppendingPathComponent:[NSString stringWithFormat:@"movie/%@", Name]];
     NSFileManager *fileManager = [NSFileManager defaultManager];
     [fileManager createFileAtPath:filePath contents:backData attributes:nil];
-    [QueueVideoHandle taskFinish:self];
+    
+    [TaskClass taskFinish:self];
 }
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
 {
-    [QueueVideoHandle taskFinish:self];
+    [TaskClass taskFinish:self];
 }
 
 - (void)dealloc

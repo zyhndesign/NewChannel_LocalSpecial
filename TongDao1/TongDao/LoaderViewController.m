@@ -7,6 +7,7 @@
 //
 
 #import "LoaderViewController.h"
+#import "ViewController.h"
 #import "AllVariable.h"
 #import "LoadZipFileNet.h"
 #import "LoadSimpleMusicNet.h"
@@ -18,6 +19,8 @@
 #import "SimpleQueCommunHandle.h"
 #import "SimpleQueMusicHandle.h"
 #import "SimpleQueVideoHandle.h"
+
+#import "XMLParser.h"
 
 @interface LoaderViewController ()
 
@@ -36,7 +39,7 @@
         [SimpleQueStoryHandle  init];
         [SimpleQueCommunHandle init];
         [SimpleQueMusicHandle  init];
-       
+        [SimpleQueVideoHandle  init];
     }
     return self;
 }
@@ -68,7 +71,6 @@
 {
     menuAry = [[NSMutableArray alloc] initWithObjects:@"风景", @"人文",@"物语",@"社区",@"音乐",@"视频",nil];
     swViewAry  = [[NSMutableArray alloc] init];
-    videoArray = [[NSMutableArray alloc] init];
     self.view.backgroundColor = [UIColor clearColor];
     menuScrolV = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 46, ScrolViewWidth, ScrolViewHeigh)];
     for (int i = 0; i < menuAry.count; i++)
@@ -120,8 +122,9 @@
     }
     else if(tag == TaskVideo)
     {
-        
-    }else;
+        taskClass = [SimpleQueVideoHandle class];
+    }
+    else;
     [taskClass clear];
 }
 
@@ -156,7 +159,8 @@
     else if(tag == TaskVideo)
     {
         taskClass = [SimpleQueVideoHandle class];
-    }else;
+    }
+    else;
     long long int allSimleSize = 0;
     if (tag == TaskMusic)
     {
@@ -183,31 +187,11 @@
     }
     else if(tag == TaskVideo)
     {
-        
+        [self caculateVedioLoadTask];
     }
     else
     {
-        for (int i = 0; i < [[AllGroupInfoArray objectAtIndex:tag] count]; i++)
-        {
-            NSDictionary *infoDict = [[AllGroupInfoArray objectAtIndex:tag] objectAtIndex:i];
-            NSString *idStr  = [infoDict objectForKey:@"id"];
-            NSString *videoS = [infoDict objectForKey:@"hasVideo"];
-            if (![self isEixstInArray:LocalFileNameArray content:idStr])
-            {
-                long simpleSize = [[infoDict objectForKey:@"size"] intValue];
-                allSimleSize += simpleSize;
-                LoadZipFileNet *loadZipNet = [[LoadZipFileNet alloc] initWithClass:[taskClass class]];
-                loadZipNet.delegate = nil;
-                loadZipNet.urlStr   = [[infoDict objectForKey:@"url"] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-                loadZipNet.md5Str   = [[infoDict objectForKey:@"md5"] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-                loadZipNet.zipStr   = [infoDict objectForKey:@"id"];
-                [taskClass addTarget:loadZipNet];
-            }
-            if([videoS isEqualToString:@"true"])
-            {
-                [videoArray addObject:infoDict];
-            }
-        }
+        
     }
     UILabel *label = (UILabel *)[[progresScrolV viewWithTag:(tag+1)*BaseViewTag] viewWithTag:(tag+1)*BaseLabelTag];
     //下载任务里面没有下载量，即没有任务，就把状态改为已下载
@@ -258,9 +242,75 @@
     }
     else if(tag == TaskVideo)
     {
-    
-    }else;
+        [SimpleQueVideoHandle setImplyLb:label];
+    }
+    else;
 }
+
+/**
+ *  计算视频的任务量
+ */
+- (void)caculateVedioLoadTask
+{
+    AllZipSize = 0;
+    AllLoadLenght = 0;
+
+    AllVideoSize = 0;
+    AllLoadVideoLenght = 0;
+    
+    [AllMovieInfoDict removeAllObjects];
+    [XMLParser clear];
+    
+    NSString *path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+    for (int i = 0; i < RootViewContr.videoArray.count; i++)
+    {
+        NSDictionary *initDict = [RootViewContr.videoArray objectAtIndex:i];
+        NSString *docXmlPath = [path stringByAppendingPathComponent:[NSString stringWithFormat:@"%@/doc.xml", [initDict objectForKey:@"id"]]];
+        [[XMLParser alloc] initWithFilePath:docXmlPath];
+    }
+    [self performSelector:@selector(goOnCaculateMovieLoader) withObject:nil afterDelay:0.2f];
+}
+
+- (void)goOnCaculateMovieLoader
+{
+    NSMutableArray *fileNameArray = [[NSMutableArray alloc] init];
+    NSString *path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+    NSArray *array = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:[path stringByAppendingPathComponent:@"movie"] error:nil];
+    [fileNameArray addObjectsFromArray:array];
+    [fileNameArray removeObject:@".DS_Store"];
+    
+    NSArray *valueArray = [AllMovieInfoDict allValues];
+    long existFileSize = 0;
+    for (int i = 0; i < valueArray.count; i++)
+    {
+        NSString *urlStr = [valueArray objectAtIndex:i];
+        NSArray *tempAry = [urlStr componentsSeparatedByString:@"/"];
+        
+        NSString *path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+        NSString *filePath = [path stringByAppendingPathComponent:[NSString stringWithFormat:@"movie/%@", [tempAry lastObject]]];
+        BOOL dirt = NO;
+        if ([[NSFileManager defaultManager] fileExistsAtPath:filePath isDirectory:&dirt])
+        {
+            NSDictionary *infoDict = [[NSFileManager defaultManager] attributesOfItemAtPath:filePath error:Nil];
+            long size = [infoDict fileSize];
+            existFileSize += size;
+        }
+        else
+        {
+            LoadSimpleMovieNet *loadMoiveNet = [[LoadSimpleMovieNet alloc] initWithClass:[SimpleQueVideoHandle class]];
+            loadMoiveNet.urlStr = urlStr;
+            loadMoiveNet.Name   = [tempAry lastObject];
+            [SimpleQueVideoHandle addTarget:loadMoiveNet];
+        }
+    }
+    AllVideoSize -= existFileSize;
+    [SimpleQueVideoHandle setSize:AllVideoSize];
+    if (AllVideoSize < 1000)
+    {
+        [self FinishLoad:TaskVideo];
+    }
+}
+
 
 - (BOOL)isEixstInArray:(NSArray*)initAry content:(NSString*)contentStr
 {
@@ -323,9 +373,18 @@
         bottomLineLb.backgroundColor = [UIColor lightGrayColor];
         [newView addSubview:bottomLineLb];
     }
-    //////开始下载
+    //////开始下载  /// 由于xml解析的原因，得延迟执行
+    [self performSelector:@selector(startLoading) withObject:nil afterDelay:0.2f];
+    
+}
+/**
+ *  开始下载
+ */
+- (void)startLoading
+{
     [SimpleQueSceneHandle startTask];
 }
+
 /**
  *  下载界面， 创建区相对应的进度条界面
  *
@@ -370,7 +429,9 @@
     [view addSubview:canleBt];
     return view;
 }
-
+/**
+ *  创建选择区的Task界面
+ */
 - (UIView*)builtMenuView:(NSInteger)viewTag
 {
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, viewTag*60, ScrolViewWidth, ViewHeigh)];
@@ -470,6 +531,7 @@
                      }];
 }
 
+// 停止下载所有任务
 - (IBAction)stopAllTask:(UIButton*)sender
 {
     [SimpleQueSceneHandle  stopTask];
@@ -478,7 +540,7 @@
     [SimpleQueCommunHandle stopTask];
     [SimpleQueMusicHandle  stopTask];
 }
-
+// 打开所有任务
 - (IBAction)openAllTask:(UIButton*)sender
 {
     for (int i = 0; i < swViewAry.count; i++)
@@ -487,7 +549,7 @@
         [swView setOn:YES animated:YES];
     }
 }
-
+//关闭所有任务
 - (IBAction)closeAllTask:(UIButton*)sender
 {
     for (int i = 0; i < swViewAry.count; i++)
