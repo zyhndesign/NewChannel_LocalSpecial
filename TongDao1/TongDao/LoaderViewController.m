@@ -27,6 +27,7 @@
 @end
 
 @implementation LoaderViewController
+@synthesize blackBgView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -539,8 +540,10 @@
 
 - (IBAction)hiddenView:(UIButton*)sender
 {
-    [UIView animateWithDuration:0.7
+    
+    [UIView animateWithDuration:0.4
                      animations:^(void){
+                         self.blackBgView.alpha = 0;
                          [self.view setFrame:CGRectMake(0, 768, self.view.frame.size.width, self.view.frame.size.height)];
                      }
                      completion:^(BOOL finish){

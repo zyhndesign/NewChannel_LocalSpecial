@@ -8,6 +8,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LoaderViewController">
             <connections>
                 <outlet property="allProgresLb" destination="oum-bD-ygO" id="wU3-B0-3fR"/>
+                <outlet property="blackBgView" destination="NE3-74-mCU" id="UQs-8R-GKw"/>
                 <outlet property="loadProgresView" destination="yVJ-14-4rK" id="sCB-rx-Y4T"/>
                 <outlet property="menuView" destination="zdi-3U-SUH" id="h7o-nZ-ukD"/>
                 <outlet property="subViewBg" destination="sLC-iX-Bfd" id="HzM-4L-A7C"/>
@@ -19,7 +20,7 @@
             <rect key="frame" x="0.0" y="20" width="1024" height="748"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <view alpha="0.29999999999999999" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NE3-74-mCU">
+                <view alpha="0.14999999999999999" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NE3-74-mCU">
                     <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>

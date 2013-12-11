@@ -151,8 +151,10 @@
 
 - (void)showLoaderView:(UIButton*)sender
 {
-    [UIView animateWithDuration:0.7
+    
+    [UIView animateWithDuration:0.4
                      animations:^(void){
+                         AllLoaderViewContr.blackBgView.alpha = 0.2;
                          [AllLoaderViewContr.view setFrame:CGRectMake(0, 0, AllLoaderViewContr.view.frame.size.width, AllLoaderViewContr.view.frame.size.height)];
                      }
                      completion:^(BOOL finish){

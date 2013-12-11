@@ -25,6 +25,8 @@
     NSMutableArray *LocalFileNameArray;
 }
 
+@property(nonatomic, strong)IBOutlet UIView *blackBgView;
+
 - (IBAction)changeView:(UIButton*)sender;
 - (IBAction)hiddenView:(UIButton*)sender;
 - (IBAction)stopAllTask:(UIButton*)sender;
