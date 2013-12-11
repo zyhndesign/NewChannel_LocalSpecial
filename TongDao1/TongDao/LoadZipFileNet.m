@@ -13,6 +13,11 @@
 #import "ContentView.h"
 #import "ViewController.h"
 
+#import "SimpleQueSceneHandle.h"
+#import "SimpleQueHumeHandle.h"
+#import "SimpleQueStoryHandle.h"
+#import "SimpleQueCommunHandle.h"
+
 @implementation LoadZipFileNet
 
 @synthesize delegate;
@@ -21,6 +26,14 @@
 @synthesize zipStr;
 @synthesize zipSize;
 
+- (id)initWithClass:(Class)TClass
+{
+    self = [super init];
+    if (self) {
+        TaskClass = TClass;
+    }
+    return self;
+}
 - (void)loadMenuFromUrl
 {
     //http://lotusprize.com/travel/bundles/eae27d77ca20db309e056e3d2dcd7d69.zip
@@ -65,7 +78,7 @@
 {
     if (connectNum >= 0)
     {
-        [QueueZipHandle taskFinish:self];
+        [TaskClass taskFinish:self];
         if ([delegate respondsToSelector:@selector(didReceiveErrorCode:)])
             [delegate didReceiveErrorCode:error];
     }
@@ -74,7 +87,6 @@
         connectNum++;
         [self reloadUrlData];
     }
-    
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
@@ -84,7 +96,7 @@
     {
         ContentView *contentVC = (ContentView*)delegate;
         contentVC.progressV.progress = [backData length]/zipSize;
-        int value = [backData length]*100.0/zipSize ;
+        int value = [backData length]*100.0/zipSize;
         contentVC.proValueLb.text = [NSString stringWithFormat:@"%d", value];
     }
     else
@@ -93,7 +105,7 @@
         RootViewContr.valueLb.text = [NSString stringWithFormat:@"%0.2f", AllLoadLenght*100.0/AllZipSize];
         RootViewContr.progressView.progress = AllLoadLenght*1.0/AllZipSize;
     }
-    
+    [TaskClass setCurrentLenght:[data length]];
 }
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection
@@ -142,7 +154,7 @@
        // NSLog(@"md5Error");
         [fileManager removeItemAtPath:filePath error:nil];
     }
-    [QueueZipHandle taskFinish:self];
+    [TaskClass taskFinish:self];
 }
 
 - (void)dealloc

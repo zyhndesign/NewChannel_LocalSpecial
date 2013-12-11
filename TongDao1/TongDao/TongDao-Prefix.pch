@@ -20,4 +20,10 @@
 
 #define iPhone5 ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? ([[UIScreen mainScreen] currentMode].size.height > 960.0f) : NO)
 
+#define TaskMusic 0
+#define TaskScence 1
+#define TaskHumanity 2
+#define TaskStory 3
+#define TaskCommunite 4
+#define TaskVideo 5
 

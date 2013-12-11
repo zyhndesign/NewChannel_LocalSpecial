@@ -17,9 +17,11 @@
 @class ViewController;
 @class SCGIFImageView;
 @class AudioPlayerViewCtr;
+@class LoaderViewController;
 
 ViewController *RootViewContr;
 AudioPlayerViewCtr *AllAudioPlayViewCtr;
+LoaderViewController *AllLoaderViewContr;
 NSMutableArray *AllGroupInfoArray;
 UIScrollView *AllScrollView;
 int AllOnlyShowPresentOne;  // 只能同时展开一个详细内容

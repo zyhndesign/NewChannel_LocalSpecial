@@ -30,7 +30,6 @@
     CommunityViewContr *communityViewCtr;
     AudioPlayerViewCtr *audioPlayViewCtr;
     VersionViewContr *versionViewCtr;
-    LoaderViewController *loaderViewContr;
     
     NSMutableArray *allInfoArray;
     

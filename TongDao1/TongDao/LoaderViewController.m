@@ -9,7 +9,12 @@
 #import "LoaderViewController.h"
 #import "AllVariable.h"
 #import "LoadZipFileNet.h"
+
 #import "SimpleQueSceneHandle.h"
+#import "SimpleQueHumeHandle.h"
+#import "SimpleQueStoryHandle.h"
+#import "SimpleQueCommunHandle.h"
+
 
 @interface LoaderViewController ()
 
@@ -21,26 +26,39 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        LocalFileNameArray = [[NSMutableArray alloc] init];
+        [self getFileNameAry];
         
-        NSString *path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
-        NSArray *array = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:path error:nil];
-        
-        [LocalFileNameArray addObjectsFromArray:array];
-        [LocalFileNameArray removeObject:@".DS_Store"];
-        [LocalFileNameArray removeObject:@"BigImage"];
-        [LocalFileNameArray removeObject:@"Data.db"];
-        [LocalFileNameArray removeObject:@"movie"];
-        [LocalFileNameArray removeObject:@"music"];
-        [LocalFileNameArray removeObject:@"ProImage"];
-        
+        [SimpleQueSceneHandle  init];
+        [SimpleQueHumeHandle   init];
+        [SimpleQueStoryHandle  init];
+        [SimpleQueCommunHandle init];
     }
     return self;
+}
+
+- (void)getFileNameAry
+{
+    if (!LocalFileNameArray)
+        LocalFileNameArray = [[NSMutableArray alloc] init];
+    else
+        [LocalFileNameArray removeAllObjects];
+    
+    NSString *path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+    NSArray *array = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:path error:nil];
+    
+    [LocalFileNameArray addObjectsFromArray:array];
+    [LocalFileNameArray removeObject:@".DS_Store"];
+    [LocalFileNameArray removeObject:@"BigImage"];
+    [LocalFileNameArray removeObject:@"Data.db"];
+    [LocalFileNameArray removeObject:@"movie"];
+    [LocalFileNameArray removeObject:@"music"];
+    [LocalFileNameArray removeObject:@"ProImage"];
 }
 
 #define ScrolViewWidth 584
 #define ScrolViewHeigh 582
 #define ViewHeigh 60
+
 - (void)viewDidLoad
 {
     menuAry = [[NSMutableArray alloc] initWithObjects:@"音乐",@"风景", @"人文",@"物语",@"社区",@"视频",nil];
@@ -50,7 +68,7 @@
     menuScrolV = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 46, ScrolViewWidth, ScrolViewHeigh)];
     for (int i = 0; i < menuAry.count; i++)
     {
-        UIView *view = [self builtMenuView:i+1];
+        UIView *view = [self builtMenuView:i];
         [menuScrolV addSubview:view];
     }
     [menuView addSubview:menuScrolV];
@@ -62,49 +80,134 @@
     [super viewDidLoad];
 }
 
+//
 #pragma mark - Data handle
 #define BaseViewTag 100
 #define BaseLabelTag 10000
 #define BaseSwitchTag 10000
+
+- (void)clearQueData:(int)tag
+{
+    Class taskClass;
+    if (tag == TaskMusic)
+    {
+    }
+    else if(tag == TaskScence)
+    {
+        taskClass = [SimpleQueSceneHandle class];
+    }
+    else if(tag == TaskHumanity)
+    {
+        taskClass = [SimpleQueHumeHandle class];
+    }
+    else if(tag == TaskStory)
+    {
+        taskClass = [SimpleQueStoryHandle class];
+    }
+    else if(tag == TaskCommunite)
+    {
+        taskClass = [SimpleQueCommunHandle class];
+    }
+    else if(tag == TaskVideo)
+    {
+        
+    }else;
+    [taskClass clear];
+}
+
 - (void)dataFilter:(int)tag
 {
-    if (tag == 0)
+    Class taskClass;
+    if (tag == TaskMusic)
+    {
+    }
+    else if(tag == TaskScence)
+    {
+        taskClass = [SimpleQueSceneHandle class];
+    }
+    else if(tag == TaskHumanity)
+    {
+        taskClass = [SimpleQueHumeHandle class];
+    }
+    else if(tag == TaskStory)
+    {
+        taskClass = [SimpleQueStoryHandle class];
+    }
+    else if(tag == TaskCommunite)
+    {
+        taskClass = [SimpleQueCommunHandle class];
+    }
+    else if(tag == TaskVideo)
+    {
+        
+    }else;
+    long long int allSimleSize = 0;
+    for (int i = 0; i < [[AllGroupInfoArray objectAtIndex:tag] count]; i++)
+    {
+        NSDictionary *infoDict = [[AllGroupInfoArray objectAtIndex:tag] objectAtIndex:i];
+        NSString *idStr  = [infoDict objectForKey:@"id"];
+        NSString *videoS = [infoDict objectForKey:@"hasVideo"];
+        if (![self isEixstInArray:LocalFileNameArray content:idStr])
+        {
+            long simpleSize = [[infoDict objectForKey:@"size"] intValue];
+            allSimleSize += simpleSize;
+            LoadZipFileNet *loadZipNet = [[LoadZipFileNet alloc] initWithClass:[taskClass class]];
+            loadZipNet.delegate = nil;
+            loadZipNet.urlStr   = [[infoDict objectForKey:@"url"] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+            loadZipNet.md5Str   = [[infoDict objectForKey:@"md5"] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+            loadZipNet.zipStr   = [infoDict objectForKey:@"id"];
+            [taskClass addTarget:loadZipNet];
+        }
+        if([videoS isEqualToString:@"true"])
+        {
+            [videoArray addObject:infoDict];
+        }
+    }
+    UILabel *label = (UILabel *)[[progresScrolV viewWithTag:(tag+1)*BaseViewTag] viewWithTag:(tag+1)*BaseLabelTag];
+    if (tag == TaskMusic)
     {
         
     }
-    else if(tag == 1)
+    else if(tag == TaskScence)
     {
-        long allSimleSize = 0;
-        for (int i = 0; i < AllGroupInfoArray.count; i++)
-        {
-            NSDictionary *infoDict = [AllGroupInfoArray objectAtIndex:i];
-            NSString *idStr  = [infoDict objectForKey:@"id"];
-            NSString *videoS = [infoDict objectForKey:@"hasVideo"];
-            if (![self isEixstInArray:[AllGroupInfoArray objectAtIndex:tag] content:idStr])
-            {
-                int simpleSize = [[infoDict objectForKey:@"size"] intValue];
-                allSimleSize += simpleSize;
-                LoadZipFileNet *loadZipNet = [[LoadZipFileNet alloc] init];
-                loadZipNet.delegate = nil;
-                loadZipNet.urlStr   = [[infoDict objectForKey:@"url"] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-                loadZipNet.md5Str   = [[infoDict objectForKey:@"md5"] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-                loadZipNet.zipStr   = [infoDict objectForKey:@"id"];
-                [SimpleQueSceneHandle addTarget:loadZipNet];
-            }
-            if([videoS isEqualToString:@"true"])
-            {
-                [videoArray addObject:infoDict];
-            }
-        }
-        UILabel *label = (UILabel *)[[progresScrolV viewWithTag:BaseViewTag] viewWithTag:tag*BaseLabelTag];
         [SimpleQueSceneHandle setSize:allSimleSize];
         [SimpleQueSceneHandle setImplyLb:label];
+        if (allSimleSize == 0)
+        {
+            [self FinishLoad:TaskScence];
+        }
     }
-    else if(tag == 2)
+    else if(tag == TaskHumanity)
     {
-        
+        [SimpleQueHumeHandle setSize:allSimleSize];
+        [SimpleQueHumeHandle setImplyLb:label];
+        if (allSimleSize == 0)
+        {
+            [self FinishLoad:TaskHumanity];
+        }
     }
-    else ;
+    else if(tag == TaskStory)
+    {
+        [SimpleQueStoryHandle setSize:allSimleSize];
+        [SimpleQueStoryHandle setImplyLb:label];
+        if (allSimleSize == 0)
+        {
+            [self FinishLoad:TaskStory];
+        }
+    }
+    else if(tag == TaskCommunite)
+    {
+        [SimpleQueCommunHandle setSize:allSimleSize];
+        [SimpleQueCommunHandle setImplyLb:label];
+        if (allSimleSize == 0)
+        {
+            [self FinishLoad:TaskCommunite];
+        }
+    }
+    else if(tag == TaskVideo)
+    {
+    
+    }else;
 }
 
 - (BOOL)isEixstInArray:(NSArray*)initAry content:(NSString*)contentStr
@@ -120,21 +223,39 @@
     return NO;
 }
 
+- (void)FinishLoad:(int)taskTag
+{
+    UILabel *implyLb = (UILabel *)[[progresScrolV viewWithTag:(taskTag+1)*BaseViewTag] viewWithTag:(taskTag+1)*BaseLabelTag];
+    implyLb.hidden = YES;
+    
+    UIButton *implyBt = (UIButton *)[[progresScrolV viewWithTag:(taskTag+1)*BaseViewTag] viewWithTag:taskTag+1];
+    [implyBt setTitle:@"已完成" forState:UIControlStateNormal];
+    [implyBt setBackgroundColor:[UIColor whiteColor]];
+    implyBt.titleLabel.font = [UIFont systemFontOfSize:17];
+    [implyBt setFrame:CGRectMake(ScrolViewWidth-60-10, 10, 60, 40)];
+    
+}
+
 #pragma mark - view handle
 - (void)rebuildProgressView
 {
     [self removeAllChildView:progresScrolV];
-    int pos = 1;
+    int pos = 0;
     UIView *newView = nil;
     for (int i = 0; i < swViewAry.count; i++)
     {
         UISwitch *switchView = [swViewAry objectAtIndex:i];
         if (switchView.on)
         {
-            [self dataFilter:i];
-            newView = [self builtProgressView:i+1 position:pos];
+            newView = [self builtProgressView:i position:pos];
             [progresScrolV addSubview:newView];
+            [self getFileNameAry];
+            [self dataFilter:i];
             pos++;
+        }
+        else
+        {
+            
         }
     }
     if (newView)
@@ -143,12 +264,13 @@
         bottomLineLb.backgroundColor = [UIColor lightGrayColor];
         [newView addSubview:bottomLineLb];
     }
+    [SimpleQueSceneHandle startTask];
 }
 
-- (UIView*)builtProgressView:(NSInteger)viewTag position:(int)position
+- (UIView*)builtProgressView:(NSInteger)viewTag position:(int)pos
 {
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, (position-1)*60, ScrolViewWidth, ViewHeigh)];
-    view.tag = viewTag*BaseViewTag;
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, pos*60, ScrolViewWidth, ViewHeigh)];
+    view.tag = (viewTag+1)*BaseViewTag;
     
     UILabel *lineLb = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, ScrolViewWidth, 1)];
     lineLb.backgroundColor = [UIColor lightGrayColor];
@@ -159,11 +281,11 @@
     titleLb.backgroundColor = [UIColor clearColor];
     titleLb.textColor = [UIColor blackColor];
     titleLb.textAlignment = NSTextAlignmentLeft;
-    titleLb.text = [menuAry objectAtIndex:viewTag-1];
+    titleLb.text = [menuAry objectAtIndex:viewTag];
     [view addSubview:titleLb];
     
     UILabel *implyLb = [[UILabel alloc] initWithFrame:CGRectMake(420, 0, 80, 60)];
-    implyLb.tag = viewTag*BaseLabelTag;
+    implyLb.tag = (viewTag+1)*BaseLabelTag;
     implyLb.textColor = [UIColor grayColor];
     implyLb.backgroundColor = [UIColor clearColor];
     implyLb.font = [UIFont systemFontOfSize:16];
@@ -171,7 +293,7 @@
     [view addSubview:implyLb];
     
     UIButton *canleBt = [UIButton buttonWithType:UIButtonTypeCustom];
-    canleBt.tag = viewTag;
+    canleBt.tag = (viewTag+1);
     [canleBt setBackgroundColor:[UIColor lightGrayColor]];
     [canleBt setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [canleBt setTitle:@"取消" forState:UIControlStateNormal];
@@ -184,8 +306,8 @@
 
 - (UIView*)builtMenuView:(NSInteger)viewTag
 {
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, (viewTag-1)*60, ScrolViewWidth, ViewHeigh)];
-    view.tag = viewTag*BaseViewTag;
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, viewTag*60, ScrolViewWidth, ViewHeigh)];
+    view.tag = (viewTag+1)*BaseViewTag;
     
     UILabel *lineLb = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, ScrolViewWidth, 1)];
     lineLb.backgroundColor = [UIColor lightGrayColor];
@@ -196,18 +318,18 @@
     titleLb.backgroundColor = [UIColor clearColor];
     titleLb.textColor = [UIColor blackColor];
     titleLb.textAlignment = NSTextAlignmentLeft;
-    titleLb.text = [menuAry objectAtIndex:viewTag-1];
+    titleLb.text = [menuAry objectAtIndex:viewTag];
     [view addSubview:titleLb];
     
     UISwitch *swithV = [[UISwitch alloc] initWithFrame:CGRectMake(523, 15, 80, 27)];
     swithV.onTintColor = [UIColor blueColor];
     swithV.thumbTintColor = [UIColor lightGrayColor];
-    swithV.tag = viewTag*BaseSwitchTag;
+    swithV.tag = (viewTag+1)*BaseSwitchTag;
     [view addSubview:swithV];
     
     [swViewAry addObject:swithV];
     
-    if (viewTag == menuAry.count)
+    if (viewTag == menuAry.count-1)
     {
         UILabel *bottomLineLb = [[UILabel alloc] initWithFrame:CGRectMake(0, ViewHeigh-1, ScrolViewWidth, 1)];
         bottomLineLb.backgroundColor = [UIColor lightGrayColor];
@@ -236,7 +358,7 @@
     sender.titleLabel.font = [UIFont systemFontOfSize:17];
     [sender setFrame:CGRectMake(ScrolViewWidth-60-10, 10, 60, 40)];
     
-    UIView *view = [progresScrolV viewWithTag:sender.tag*100];
+    UIView  *view = [progresScrolV viewWithTag:sender.tag*100];
     UILabel *implyLb = (UILabel*)[view viewWithTag:sender.tag*10000];
     implyLb.hidden = YES;
 }
@@ -250,7 +372,7 @@
     animation.type = @"oglFlip";
     animation.subtype = kCATransitionFromLeft;
     NSUInteger beforeV = [[subViewBg subviews] indexOfObject:menuView];
-    NSUInteger afterV = [[subViewBg subviews] indexOfObject:loadProgresView];
+    NSUInteger afterV  = [[subViewBg subviews] indexOfObject:loadProgresView];
     if (sender.tag == 1)  //// 完成
     {
         [self rebuildProgressView];

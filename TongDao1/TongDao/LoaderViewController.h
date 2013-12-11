@@ -31,5 +31,8 @@
 - (IBAction)stopAllTask:(UIButton*)sender;
 - (IBAction)openAllTask:(UIButton*)sender;
 - (IBAction)closeAllTask:(UIButton*)sender;
+
+- (void)FinishLoad:(int)taskTag;
+
 @end
 

@@ -71,6 +71,11 @@
 		D38A15D11807CCEA00AEDF98 /* QueueProHanle.m in Sources */ = {isa = PBXBuildFile; fileRef = D38A15CC1807CCEA00AEDF98 /* QueueProHanle.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		D38A15D31807CCEA00AEDF98 /* QueueZipHandle.m in Sources */ = {isa = PBXBuildFile; fileRef = D38A15D01807CCEA00AEDF98 /* QueueZipHandle.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		D38A15E81807E82500AEDF98 /* Default-Landscape~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = D38A15E71807E82500AEDF98 /* Default-Landscape~ipad.png */; };
+		D3C23CDB1856F25D00CA00DB /* SimpleQueHumeHandle.m in Sources */ = {isa = PBXBuildFile; fileRef = D3C23CDA1856F25D00CA00DB /* SimpleQueHumeHandle.m */; };
+		D3C23CDE1856F28200CA00DB /* SimpleQueStoryHandle.m in Sources */ = {isa = PBXBuildFile; fileRef = D3C23CDD1856F28200CA00DB /* SimpleQueStoryHandle.m */; };
+		D3C23CE11856F2AD00CA00DB /* SimpleQueCommunHandle.m in Sources */ = {isa = PBXBuildFile; fileRef = D3C23CE01856F2AD00CA00DB /* SimpleQueCommunHandle.m */; };
+		D3C23CE41856F2C600CA00DB /* SimpleQueVideoHandle.m in Sources */ = {isa = PBXBuildFile; fileRef = D3C23CE31856F2C600CA00DB /* SimpleQueVideoHandle.m */; };
+		D3C23CE71856F2DA00CA00DB /* SimpleQueMusicHandle.m in Sources */ = {isa = PBXBuildFile; fileRef = D3C23CE61856F2DA00CA00DB /* SimpleQueMusicHandle.m */; };
 		D3D6E3621842F80C001E3621 /* btn_arrow_left.png in Resources */ = {isa = PBXBuildFile; fileRef = D3D6E2DF1842F80C001E3621 /* btn_arrow_left.png */; };
 		D3D6E3631842F80C001E3621 /* btn_arrow_left_pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = D3D6E2E01842F80C001E3621 /* btn_arrow_left_pressed.png */; };
 		D3D6E3641842F80C001E3621 /* btn_arrow_right.png in Resources */ = {isa = PBXBuildFile; fileRef = D3D6E2E11842F80C001E3621 /* btn_arrow_right.png */; };
@@ -326,6 +331,16 @@
 		D38A15CF1807CCEA00AEDF98 /* QueueZipHandle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QueueZipHandle.h; sourceTree = "<group>"; };
 		D38A15D01807CCEA00AEDF98 /* QueueZipHandle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QueueZipHandle.m; sourceTree = "<group>"; };
 		D38A15E71807E82500AEDF98 /* Default-Landscape~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape~ipad.png"; sourceTree = "<group>"; };
+		D3C23CD91856F25D00CA00DB /* SimpleQueHumeHandle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleQueHumeHandle.h; sourceTree = "<group>"; };
+		D3C23CDA1856F25D00CA00DB /* SimpleQueHumeHandle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleQueHumeHandle.m; sourceTree = "<group>"; };
+		D3C23CDC1856F28200CA00DB /* SimpleQueStoryHandle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleQueStoryHandle.h; sourceTree = "<group>"; };
+		D3C23CDD1856F28200CA00DB /* SimpleQueStoryHandle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleQueStoryHandle.m; sourceTree = "<group>"; };
+		D3C23CDF1856F2AD00CA00DB /* SimpleQueCommunHandle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleQueCommunHandle.h; sourceTree = "<group>"; };
+		D3C23CE01856F2AD00CA00DB /* SimpleQueCommunHandle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleQueCommunHandle.m; sourceTree = "<group>"; };
+		D3C23CE21856F2C600CA00DB /* SimpleQueVideoHandle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleQueVideoHandle.h; sourceTree = "<group>"; };
+		D3C23CE31856F2C600CA00DB /* SimpleQueVideoHandle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleQueVideoHandle.m; sourceTree = "<group>"; };
+		D3C23CE51856F2DA00CA00DB /* SimpleQueMusicHandle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleQueMusicHandle.h; sourceTree = "<group>"; };
+		D3C23CE61856F2DA00CA00DB /* SimpleQueMusicHandle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleQueMusicHandle.m; sourceTree = "<group>"; };
 		D3D6E2DF1842F80C001E3621 /* btn_arrow_left.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_arrow_left.png; sourceTree = "<group>"; };
 		D3D6E2E01842F80C001E3621 /* btn_arrow_left_pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_arrow_left_pressed.png; sourceTree = "<group>"; };
 		D3D6E2E11842F80C001E3621 /* btn_arrow_right.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_arrow_right.png; sourceTree = "<group>"; };
@@ -776,6 +791,16 @@
 			children = (
 				D36F05671855B267003D7EFD /* SimpleQueSceneHandle.h */,
 				D36F05681855B267003D7EFD /* SimpleQueSceneHandle.m */,
+				D3C23CD91856F25D00CA00DB /* SimpleQueHumeHandle.h */,
+				D3C23CDA1856F25D00CA00DB /* SimpleQueHumeHandle.m */,
+				D3C23CDC1856F28200CA00DB /* SimpleQueStoryHandle.h */,
+				D3C23CDD1856F28200CA00DB /* SimpleQueStoryHandle.m */,
+				D3C23CDF1856F2AD00CA00DB /* SimpleQueCommunHandle.h */,
+				D3C23CE01856F2AD00CA00DB /* SimpleQueCommunHandle.m */,
+				D3C23CE51856F2DA00CA00DB /* SimpleQueMusicHandle.h */,
+				D3C23CE61856F2DA00CA00DB /* SimpleQueMusicHandle.m */,
+				D3C23CE21856F2C600CA00DB /* SimpleQueVideoHandle.h */,
+				D3C23CE31856F2C600CA00DB /* SimpleQueVideoHandle.m */,
 			);
 			name = SimpleQue;
 			sourceTree = "<group>";
@@ -1270,6 +1295,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D308826617E5467B00F24817 /* main.m in Sources */,
+				D3C23CE41856F2C600CA00DB /* SimpleQueVideoHandle.m in Sources */,
 				D3F3467B1808E4A600479AC8 /* ImageShowView.m in Sources */,
 				D308826A17E5467B00F24817 /* AppDelegate.m in Sources */,
 				D308827317E5467B00F24817 /* ViewController.m in Sources */,
@@ -1286,6 +1312,7 @@
 				D30882A417E5489700F24817 /* CDataScanner.m in Sources */,
 				D3F3467E1808ED1D00479AC8 /* HeadProImageNet.m in Sources */,
 				D30882A517E5489700F24817 /* CJSONDeserializer.m in Sources */,
+				D3C23CE71856F2DA00CA00DB /* SimpleQueMusicHandle.m in Sources */,
 				D30882A617E5489700F24817 /* CJSONScanner.m in Sources */,
 				D56B787C17E55E8D005DA29F /* ioapi.c in Sources */,
 				D56B787D17E55E8D005DA29F /* mztools.c in Sources */,
@@ -1293,6 +1320,7 @@
 				D56B787E17E55E8D005DA29F /* unzip.c in Sources */,
 				D56B787F17E55E8D005DA29F /* zip.c in Sources */,
 				D343235F17E593A300F6B5E5 /* LoadMenuInfoNet.m in Sources */,
+				D3C23CDB1856F25D00CA00DB /* SimpleQueHumeHandle.m in Sources */,
 				D3FD2DEC17F50C6F00E98730 /* SimpleTrationView.m in Sources */,
 				D3E7B04417F4723700A1123E /* SimpleTrationSmallView.m in Sources */,
 				D343236217E593B600F6B5E5 /* LoadZipFileNet.m in Sources */,
@@ -1306,9 +1334,11 @@
 				D343238317E5B0B100F6B5E5 /* StoryViewContr.m in Sources */,
 				D343238817E5B0E000F6B5E5 /* CommunityViewContr.m in Sources */,
 				D3057E9C17E7ED3900505C69 /* MoviePlayViewContr.m in Sources */,
+				D3C23CE11856F2AD00CA00DB /* SimpleQueCommunHandle.m in Sources */,
 				D38A15D31807CCEA00AEDF98 /* QueueZipHandle.m in Sources */,
 				D32ED8BA180E33D4003AB2A3 /* TextLayoutView.m in Sources */,
 				D3EDACC01846EA7A00CD62B7 /* QueueOnceLoaderZip.m in Sources */,
+				D3C23CDE1856F28200CA00DB /* SimpleQueStoryHandle.m in Sources */,
 				D3057EA617E823BD00505C69 /* VersionViewContr.m in Sources */,
 				D3057EB717E8323000505C69 /* ActiveView.m in Sources */,
 				D3E7B04117F469DA00A1123E /* SimpleHumanityView.m in Sources */,

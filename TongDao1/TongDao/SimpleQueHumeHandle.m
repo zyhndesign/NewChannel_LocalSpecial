@@ -1,19 +1,19 @@
 //
-//  SimpleQueSceneHandle.m
+//  SimpleQueHumeHandle.m
 //  TongDao
 //
-//  Created by sunyong on 13-12-9.
+//  Created by sunyong on 13-12-10.
 //  Copyright (c) 2013年 sunyong. All rights reserved.
 //
 
-#import "SimpleQueSceneHandle.h"
+#import "SimpleQueHumeHandle.h"
 #import "LoadZipFileNet.h"
 #import "AllVariable.h"
 #import "ViewController.h"
 #import "LoaderViewController.h"
-#import "SimpleQueHumeHandle.h"
+#import "SimpleQueStoryHandle.h"
 
-@implementation SimpleQueSceneHandle
+@implementation SimpleQueHumeHandle
 
 static __strong NSMutableArray *allTaskAry;
 static long allSize;
@@ -79,6 +79,7 @@ static BOOL Loading;
 
 + (void)startTask
 {
+    NSLog(@"taskCount:%d", [allTaskAry count]);
     if (Loading) return;
     if (allTaskAry.count > 0)
     {
@@ -89,17 +90,17 @@ static BOOL Loading;
     else
     {
         //finish
-        [AllLoaderViewContr FinishLoad:TaskScence];
-        [SimpleQueHumeHandle startTask];
+        [AllLoaderViewContr FinishLoad:TaskHumanity];
+        [SimpleQueStoryHandle startTask];
         Loading = NO;
-        NSLog(@"SceneHandle Finish!");
+        NSLog(@"Humanity Finish!");
     }
 }
 
 static int position;
 + (void)addTarget:(id)target
 {
-    if (![SimpleQueSceneHandle isEixstInAry:allTaskAry zipNet:target])
+    if (![SimpleQueHumeHandle isEixstInAry:allTaskAry zipNet:target])
     {
         [allTaskAry addObject:target];
     }
@@ -124,6 +125,7 @@ static int position;
 + (void)taskFinish:(id)target
 {
     [allTaskAry removeObject:target];
+    NSLog(@"finish-->");
     if (allTaskAry.count > 0)
     {
         LoadZipFileNet *tempProNet = (LoadZipFileNet*)[allTaskAry lastObject];
@@ -132,11 +134,12 @@ static int position;
     else
     {
         //finish
-        [AllLoaderViewContr FinishLoad:TaskScence];
-        [SimpleQueHumeHandle startTask];
         Loading = NO;
-        NSLog(@"SceneHandle Finish!");
+        [AllLoaderViewContr FinishLoad:TaskHumanity];
+        [SimpleQueStoryHandle startTask];
+        NSLog(@"Humanity Finish!");
     };
 }
+
 
 @end
