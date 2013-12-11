@@ -104,6 +104,13 @@
     [_scrollView addSubview:communityViewCtr.view];
     [_scrollView addSubview:versionViewCtr.view];
     
+    
+    UIButton *showLoaderVBt = [UIButton buttonWithType:UIButtonTypeSystem];
+    [showLoaderVBt setFrame:CGRectMake(1024-100, 0, 100, 50)];
+    [showLoaderVBt setTitle:@"Show" forState:UIControlStateNormal];
+    [showLoaderVBt addTarget:self action:@selector(showLoaderView:) forControlEvents:UIControlEventTouchDown];
+    [self.view addSubview:showLoaderVBt];
+    
     AllLoaderViewContr = [[LoaderViewController alloc] init];
     [self.view addSubview:AllLoaderViewContr.view];
     
@@ -134,11 +141,22 @@
 
 - (void)addMaskView
 {
+
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
+}
+
+- (void)showLoaderView:(UIButton*)sender
+{
+    [UIView animateWithDuration:0.7
+                     animations:^(void){
+                         [AllLoaderViewContr.view setFrame:CGRectMake(0, 0, AllLoaderViewContr.view.frame.size.width, AllLoaderViewContr.view.frame.size.height)];
+                     }
+                     completion:^(BOOL finish){
+                     }];
 }
 #pragma mark - scrollview delegate
 
