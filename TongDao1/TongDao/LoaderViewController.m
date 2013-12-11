@@ -472,7 +472,11 @@
 
 - (IBAction)stopAllTask:(UIButton*)sender
 {
-    
+    [SimpleQueSceneHandle  stopTask];
+    [SimpleQueHumeHandle   stopTask];
+    [SimpleQueStoryHandle  stopTask];
+    [SimpleQueCommunHandle stopTask];
+    [SimpleQueMusicHandle  stopTask];
 }
 
 - (IBAction)openAllTask:(UIButton*)sender

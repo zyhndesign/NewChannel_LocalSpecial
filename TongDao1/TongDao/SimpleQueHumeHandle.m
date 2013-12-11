@@ -36,6 +36,16 @@ static BOOL Loading;
     impLyLB = nil;
 }
 
++ (void)stopTask
+{
+    if (Loading)
+    {
+        LoadZipFileNet *tempProNet = [allTaskAry lastObject];
+        [tempProNet cancelLoad];
+        Loading = NO;
+    }
+}
+
 + (BOOL)getLoadingStatus
 {
     return Loading;

@@ -39,6 +39,16 @@ static BOOL Loading;
     impLyLB = nil;
 }
 
++ (void)stopTask
+{
+    if (Loading)
+    {
+        LoadSimpleMusicNet *tempProNet = [allTaskAry lastObject];
+        [tempProNet cancelLoad];
+        Loading = NO;
+    }
+}
+
 + (BOOL)getLoadingStatus
 {
     return Loading;
