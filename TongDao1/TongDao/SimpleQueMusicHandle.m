@@ -58,10 +58,11 @@ static BOOL Loading;
 + (void)setCurrentLenght:(int)lenght
 {
     lenghtP += lenght;
+    NSLog(@"%ld-->%ld", allSize, lenghtP);
     if (impLyLB)
     {
         impLyLB.textColor = [UIColor redColor];
-        impLyLB.text = [NSString stringWithFormat:@"%0.1f %@", lenghtP*100.0/allTaskAry.count, @"%"];
+        impLyLB.text = [NSString stringWithFormat:@"%0.1f %@", lenghtP*100.0/allSize, @"%"];
     }
 }
 
@@ -73,6 +74,11 @@ static BOOL Loading;
 + (void)setImplyLb:(UILabel*)implyLb
 {
     impLyLB = implyLb;
+    if(Loading)
+    {
+        impLyLB.textColor = [UIColor redColor];
+        impLyLB.text = [NSString stringWithFormat:@"%0.1f %@", lenghtP*100.0/allSize, @"%"];
+    }
 }
 
 + (void)init
@@ -98,6 +104,7 @@ static BOOL Loading;
     if (allTaskAry.count > 0)
     {
         Loading = YES;
+        [SimpleQueMusicHandle setCurrentLenght:0];
         LoadSimpleMusicNet *tempProNet = [allTaskAry lastObject];
         [tempProNet loadMenuFromUrl];
     }

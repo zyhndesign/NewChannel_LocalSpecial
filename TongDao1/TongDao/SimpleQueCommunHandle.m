@@ -32,6 +32,7 @@ static BOOL Loading;
     {
         LoadZipFileNet *tempProNet = [allTaskAry lastObject];
         [tempProNet cancelLoad];
+        [SimpleQueMusicHandle startTask];
     }
     Loading = NO;
     [allTaskAry removeAllObjects];

@@ -35,6 +35,8 @@
         [SimpleQueHumeHandle   init];
         [SimpleQueStoryHandle  init];
         [SimpleQueCommunHandle init];
+        [SimpleQueMusicHandle  init];
+       
     }
     return self;
 }
@@ -98,7 +100,7 @@
     Class taskClass;
     if (tag == TaskMusic)
     {
-        
+        taskClass = [SimpleQueMusicHandle class];
     }
     else if(tag == TaskScence)
     {
@@ -171,7 +173,7 @@
             }
             else
             {
-                LoadSimpleMusicNet *loadSimpleMisicNet = [[LoadSimpleMusicNet alloc] init];
+                LoadSimpleMusicNet *loadSimpleMisicNet = [[LoadSimpleMusicNet alloc] initWithClass:[taskClass class]];
                 loadSimpleMisicNet.musicUrl = [dict objectForKey:@"music_path"];
                 loadSimpleMisicNet.Name = [dict objectForKey:@"music_name"];
                 [taskClass addTarget:loadSimpleMisicNet];
@@ -211,11 +213,11 @@
     //下载任务里面没有下载量，即没有任务，就把状态改为已下载
     if (tag == TaskMusic)
     {
-        [SimpleQueSceneHandle setSize:allSimleSize];
-        [SimpleQueSceneHandle setImplyLb:label];
+        [SimpleQueMusicHandle setSize:allSimleSize];
+        [SimpleQueMusicHandle setImplyLb:label];
         if (allSimleSize == 0)
         {
-            [self FinishLoad:TaskScence];
+            [self FinishLoad:TaskMusic];
         }
     }
     else if(tag == TaskScence)
@@ -321,6 +323,7 @@
         bottomLineLb.backgroundColor = [UIColor lightGrayColor];
         [newView addSubview:bottomLineLb];
     }
+    //////开始下载
     [SimpleQueSceneHandle startTask];
 }
 /**
@@ -417,6 +420,8 @@
 - (void)canleLoader:(UIButton*)sender
 {
     if ([sender.titleLabel.text isEqualToString:@"已取消"])
+        return;
+    if ([sender.titleLabel.text isEqualToString:@"已完成"])
         return;
     [sender setTitle:@"已取消" forState:UIControlStateNormal];
     [sender setBackgroundColor:[UIColor whiteColor]];

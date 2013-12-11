@@ -15,6 +15,7 @@
 #import "SimpleQueHumeHandle.h"
 #import "SimpleQueStoryHandle.h"
 #import "SimpleQueCommunHandle.h"
+#import "SimpleQueMusicHandle.h"
 
 @implementation SimpleQueSceneHandle
 
@@ -113,8 +114,13 @@ static BOOL Loading;
 
 + (BOOL)otherLoadingStatus
 {
-    return [SimpleQueHumeHandle getLoadingStatus] || [SimpleQueStoryHandle getLoadingStatus] ||[SimpleQueCommunHandle getLoadingStatus];
+    if ([SimpleQueHumeHandle getLoadingStatus] || [SimpleQueStoryHandle getLoadingStatus] ||[SimpleQueCommunHandle getLoadingStatus] || [SimpleQueMusicHandle getLoadingStatus])
+    {
+        return YES;
+    }
+    return NO;
 }
+                                                                                                
 static int position;
 + (void)addTarget:(id)target
 {

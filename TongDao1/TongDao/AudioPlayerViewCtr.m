@@ -221,14 +221,14 @@
     [activeView stopAnimating];
     NSArray *arry = [dict objectForKey:@"data"];
     
-    [AllGroupInfoArray replaceObjectAtIndex:0 withObject:arry];
+    [AllGroupInfoArray replaceObjectAtIndex:TaskMusic withObject:arry];
     
-    for (int i = 0; i < arry.count; i++)
-    {
-        NSDictionary *dict = [arry objectAtIndex:i];
-        LoadSimpleMusicNet *loadSimpleMisicNet = [[LoadSimpleMusicNet alloc] init];
-        [loadSimpleMisicNet loadMusicData:[dict objectForKey:@"music_path"] musicName:[dict objectForKey:@"music_name"]];
-    }
+//    for (int i = 0; i < arry.count; i++)
+//    {
+//        NSDictionary *dict = [arry objectAtIndex:i];
+//        LoadSimpleMusicNet *loadSimpleMisicNet = [[LoadSimpleMusicNet alloc] init];
+//        [loadSimpleMisicNet loadMusicData:[dict objectForKey:@"music_path"] musicName:[dict objectForKey:@"music_name"]];
+//    }
 }
 
 - (void)didReceiveErrorCode:(NSError *)ErrorDict
