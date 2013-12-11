@@ -23,11 +23,22 @@ static BOOL Loading;
 
 + (void)clear
 {
+    if (Loading)
+    {
+        LoadZipFileNet *tempProNet = [allTaskAry lastObject];
+        [tempProNet cancelLoad];
+        [SimpleQueCommunHandle startTask];
+    }
+    Loading = NO;
     [allTaskAry removeAllObjects];
     allSize = 0;
     lenghtP = 0;
     impLyLB = nil;
-    Loading = NO;
+}
+
++ (BOOL)getLoadingStatus
+{
+    return Loading;
 }
 
 + (void)setSize:(long)size

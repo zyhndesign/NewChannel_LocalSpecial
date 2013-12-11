@@ -220,6 +220,9 @@
     stopAllView.hidden = YES;
     [activeView stopAnimating];
     NSArray *arry = [dict objectForKey:@"data"];
+    
+    [AllGroupInfoArray replaceObjectAtIndex:0 withObject:arry];
+    
     for (int i = 0; i < arry.count; i++)
     {
         NSDictionary *dict = [arry objectAtIndex:i];

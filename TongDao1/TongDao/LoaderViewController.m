@@ -9,12 +9,15 @@
 #import "LoaderViewController.h"
 #import "AllVariable.h"
 #import "LoadZipFileNet.h"
+#import "LoadSimpleMusicNet.h"
+#import "LoadSimpleMovieNet.h"
 
 #import "SimpleQueSceneHandle.h"
 #import "SimpleQueHumeHandle.h"
 #import "SimpleQueStoryHandle.h"
 #import "SimpleQueCommunHandle.h"
-
+#import "SimpleQueMusicHandle.h"
+#import "SimpleQueVideoHandle.h"
 
 @interface LoaderViewController ()
 
@@ -61,7 +64,7 @@
 
 - (void)viewDidLoad
 {
-    menuAry = [[NSMutableArray alloc] initWithObjects:@"音乐",@"风景", @"人文",@"物语",@"社区",@"视频",nil];
+    menuAry = [[NSMutableArray alloc] initWithObjects:@"风景", @"人文",@"物语",@"社区",@"音乐",@"视频",nil];
     swViewAry  = [[NSMutableArray alloc] init];
     videoArray = [[NSMutableArray alloc] init];
     self.view.backgroundColor = [UIColor clearColor];
@@ -85,12 +88,17 @@
 #define BaseViewTag 100
 #define BaseLabelTag 10000
 #define BaseSwitchTag 10000
-
+/**
+ *  clear每个队列数据
+ *
+ *  @param tag 每个区的标记
+ */
 - (void)clearQueData:(int)tag
 {
     Class taskClass;
     if (tag == TaskMusic)
     {
+        
     }
     else if(tag == TaskScence)
     {
@@ -115,11 +123,17 @@
     [taskClass clear];
 }
 
+/**
+ *  数据刷选，把需要下载的任务存放到列表中
+ *
+ *  @param tag 每个区的标记
+ */
 - (void)dataFilter:(int)tag
 {
     Class taskClass;
     if (tag == TaskMusic)
     {
+        taskClass = [SimpleQueMusicHandle class];
     }
     else if(tag == TaskScence)
     {
@@ -139,34 +153,70 @@
     }
     else if(tag == TaskVideo)
     {
-        
+        taskClass = [SimpleQueVideoHandle class];
     }else;
     long long int allSimleSize = 0;
-    for (int i = 0; i < [[AllGroupInfoArray objectAtIndex:tag] count]; i++)
+    if (tag == TaskMusic)
     {
-        NSDictionary *infoDict = [[AllGroupInfoArray objectAtIndex:tag] objectAtIndex:i];
-        NSString *idStr  = [infoDict objectForKey:@"id"];
-        NSString *videoS = [infoDict objectForKey:@"hasVideo"];
-        if (![self isEixstInArray:LocalFileNameArray content:idStr])
+        NSArray *arry = [AllGroupInfoArray objectAtIndex:tag];
+        NSString *path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+        for (int i = 0; i < [arry count]; i++)
         {
-            long simpleSize = [[infoDict objectForKey:@"size"] intValue];
-            allSimleSize += simpleSize;
-            LoadZipFileNet *loadZipNet = [[LoadZipFileNet alloc] initWithClass:[taskClass class]];
-            loadZipNet.delegate = nil;
-            loadZipNet.urlStr   = [[infoDict objectForKey:@"url"] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-            loadZipNet.md5Str   = [[infoDict objectForKey:@"md5"] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-            loadZipNet.zipStr   = [infoDict objectForKey:@"id"];
-            [taskClass addTarget:loadZipNet];
+            NSDictionary *dict = [arry objectAtIndex:i];
+            NSString *filePath = [path stringByAppendingPathComponent:[NSString stringWithFormat:@"music/%@", [dict objectForKey:@"music_name"]]];
+            BOOL dirt = NO;
+            if ([[NSFileManager defaultManager] fileExistsAtPath:filePath isDirectory:&dirt])
+            {
+                //// 音乐文件已经存在
+            }
+            else
+            {
+                LoadSimpleMusicNet *loadSimpleMisicNet = [[LoadSimpleMusicNet alloc] init];
+                loadSimpleMisicNet.musicUrl = [dict objectForKey:@"music_path"];
+                loadSimpleMisicNet.Name = [dict objectForKey:@"music_name"];
+                [taskClass addTarget:loadSimpleMisicNet];
+                allSimleSize++;
+            }
         }
-        if([videoS isEqualToString:@"true"])
+    }
+    else if(tag == TaskVideo)
+    {
+        
+    }
+    else
+    {
+        for (int i = 0; i < [[AllGroupInfoArray objectAtIndex:tag] count]; i++)
         {
-            [videoArray addObject:infoDict];
+            NSDictionary *infoDict = [[AllGroupInfoArray objectAtIndex:tag] objectAtIndex:i];
+            NSString *idStr  = [infoDict objectForKey:@"id"];
+            NSString *videoS = [infoDict objectForKey:@"hasVideo"];
+            if (![self isEixstInArray:LocalFileNameArray content:idStr])
+            {
+                long simpleSize = [[infoDict objectForKey:@"size"] intValue];
+                allSimleSize += simpleSize;
+                LoadZipFileNet *loadZipNet = [[LoadZipFileNet alloc] initWithClass:[taskClass class]];
+                loadZipNet.delegate = nil;
+                loadZipNet.urlStr   = [[infoDict objectForKey:@"url"] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+                loadZipNet.md5Str   = [[infoDict objectForKey:@"md5"] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+                loadZipNet.zipStr   = [infoDict objectForKey:@"id"];
+                [taskClass addTarget:loadZipNet];
+            }
+            if([videoS isEqualToString:@"true"])
+            {
+                [videoArray addObject:infoDict];
+            }
         }
     }
     UILabel *label = (UILabel *)[[progresScrolV viewWithTag:(tag+1)*BaseViewTag] viewWithTag:(tag+1)*BaseLabelTag];
+    //下载任务里面没有下载量，即没有任务，就把状态改为已下载
     if (tag == TaskMusic)
     {
-        
+        [SimpleQueSceneHandle setSize:allSimleSize];
+        [SimpleQueSceneHandle setImplyLb:label];
+        if (allSimleSize == 0)
+        {
+            [self FinishLoad:TaskScence];
+        }
     }
     else if(tag == TaskScence)
     {
@@ -222,7 +272,11 @@
     }
     return NO;
 }
-
+/**
+ *  区的下载任务完成
+ *
+ *  @param taskTag 区的标记
+ */
 - (void)FinishLoad:(int)taskTag
 {
     UILabel *implyLb = (UILabel *)[[progresScrolV viewWithTag:(taskTag+1)*BaseViewTag] viewWithTag:(taskTag+1)*BaseLabelTag];
@@ -237,6 +291,9 @@
 }
 
 #pragma mark - view handle
+/**
+ *  重新建下载界面, 重新安排下载任务
+ */
 - (void)rebuildProgressView
 {
     [self removeAllChildView:progresScrolV];
@@ -255,7 +312,7 @@
         }
         else
         {
-            
+            [self clearQueData:i];
         }
     }
     if (newView)
@@ -266,7 +323,14 @@
     }
     [SimpleQueSceneHandle startTask];
 }
-
+/**
+ *  下载界面， 创建区相对应的进度条界面
+ *
+ *  @param viewTag 区的标记
+ *  @param pos     区在下载界面的位置
+ *
+ *  @return 区的进度条界面
+ */
 - (UIView*)builtProgressView:(NSInteger)viewTag position:(int)pos
 {
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, pos*60, ScrolViewWidth, ViewHeigh)];
@@ -349,6 +413,7 @@
     }
 }
 #pragma mark - Bt Event
+// canle loader
 - (void)canleLoader:(UIButton*)sender
 {
     if ([sender.titleLabel.text isEqualToString:@"已取消"])
@@ -361,8 +426,11 @@
     UIView  *view = [progresScrolV viewWithTag:sender.tag*100];
     UILabel *implyLb = (UILabel*)[view viewWithTag:sender.tag*10000];
     implyLb.hidden = YES;
+    
+    [self clearQueData:sender.tag-1];
 }
 
+//切换界面，重新安排下载任务
 - (IBAction)changeView:(UIButton*)sender
 {
     CATransition *animation = [CATransition animation];

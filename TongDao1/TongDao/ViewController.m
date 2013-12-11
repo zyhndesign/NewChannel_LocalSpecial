@@ -62,7 +62,6 @@
     videoArray        = [[NSMutableArray alloc] init];
     AllMovieInfoDict  = [[NSMutableDictionary alloc] init];
     allInfoArray      = [[NSMutableArray alloc] init];
-    AllGroupInfoArray = [[NSMutableArray alloc] init];
     
     NSString *path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
     NSArray *array = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:[path stringByAppendingString:@"/music"] error:nil];
@@ -302,10 +301,10 @@ static BOOL handleScrol;
     [allInfoArray addObjectsFromArray:cateFou];
     [allInfoArray addObjectsFromArray:cateFiv];
     
-    [AllGroupInfoArray addObject:cateTwo];
-    [AllGroupInfoArray addObject:cateThr];
-    [AllGroupInfoArray addObject:cateFou];
-    [AllGroupInfoArray addObject:cateFiv];
+    [AllGroupInfoArray replaceObjectAtIndex:1 withObject:cateTwo];
+    [AllGroupInfoArray replaceObjectAtIndex:2 withObject:cateThr];
+    [AllGroupInfoArray replaceObjectAtIndex:3 withObject:cateFou];
+    [AllGroupInfoArray replaceObjectAtIndex:4 withObject:cateFiv];
     
     [homePageViewCtr  loadSubview:cateOne];
     [landscapeViewCtr loadSubview:cateTwo];

@@ -16,6 +16,7 @@
 #import "SimpleQueHumeHandle.h"
 #import "SimpleQueStoryHandle.h"
 #import "SimpleQueCommunHandle.h"
+#import "SimpleQueMusicHandle.h"
 
 @implementation SimpleQueCommunHandle
 
@@ -27,11 +28,21 @@ static BOOL Loading;
 
 + (void)clear
 {
+    if (Loading)
+    {
+        LoadZipFileNet *tempProNet = [allTaskAry lastObject];
+        [tempProNet cancelLoad];
+    }
+    Loading = NO;
     [allTaskAry removeAllObjects];
     allSize = 0;
     lenghtP = 0;
     impLyLB = nil;
-    Loading = NO;
+}
+
++ (BOOL)getLoadingStatus
+{
+    return Loading;
 }
 
 + (void)setSize:(long)size
@@ -95,6 +106,7 @@ static BOOL Loading;
     {
         //finish
         [AllLoaderViewContr FinishLoad:TaskCommunite];
+        [SimpleQueMusicHandle startTask];
         NSLog(@"Communite Finish!");
         Loading = NO;
     }
@@ -139,9 +151,26 @@ static int position;
         //finish
         Loading = NO;
         [AllLoaderViewContr FinishLoad:TaskCommunite];
+        [SimpleQueMusicHandle startTask];
         NSLog(@"Communite Finish!");
     };
 }
 
++ (void)LastLoadingJudge
+{
+    if ([SimpleQueSceneHandle getStatus])
+    {
+        [SimpleQueSceneHandle startTask];
+    }
+    else if([SimpleQueHumeHandle getStatus])
+    {
+        [SimpleQueHumeHandle startTask];
+    }
+    else if([SimpleQueStoryHandle getStatus])
+    {
+        [SimpleQueStoryHandle startTask];
+    }
+    else ;
+}
 
 @end

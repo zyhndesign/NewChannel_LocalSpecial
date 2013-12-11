@@ -23,4 +23,6 @@
 + (void)startTask;
 + (BOOL)getStatus;
 + (void)clear;
++ (BOOL)getLoadingStatus;
+
 @end

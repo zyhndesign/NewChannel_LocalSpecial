@@ -11,7 +11,10 @@
 #import "AllVariable.h"
 #import "ViewController.h"
 #import "LoaderViewController.h"
+
 #import "SimpleQueHumeHandle.h"
+#import "SimpleQueStoryHandle.h"
+#import "SimpleQueCommunHandle.h"
 
 @implementation SimpleQueSceneHandle
 
@@ -23,11 +26,18 @@ static BOOL Loading;
 
 + (void)clear
 {
+    if (Loading)
+    {
+        LoadZipFileNet *tempProNet = [allTaskAry lastObject];
+        [tempProNet cancelLoad];
+        [SimpleQueHumeHandle startTask];
+    }
+    Loading = NO;
     [allTaskAry removeAllObjects];
     allSize = 0;
     lenghtP = 0;
     impLyLB = nil;
-    Loading = NO;
+    
 }
 
 + (void)setSize:(long)size
@@ -39,6 +49,11 @@ static BOOL Loading;
 + (long)getSize
 {
     return allSize;
+}
+
++ (BOOL)getLoadingStatus
+{
+    return Loading;
 }
 
 + (void)setCurrentLenght:(int)lenght
@@ -79,7 +94,7 @@ static BOOL Loading;
 
 + (void)startTask
 {
-    if (Loading) return;
+    if (Loading || [SimpleQueSceneHandle otherLoadingStatus]) return;
     if (allTaskAry.count > 0)
     {
         Loading = YES;
@@ -96,6 +111,10 @@ static BOOL Loading;
     }
 }
 
++ (BOOL)otherLoadingStatus
+{
+    return [SimpleQueHumeHandle getLoadingStatus] || [SimpleQueStoryHandle getLoadingStatus] ||[SimpleQueCommunHandle getLoadingStatus];
+}
 static int position;
 + (void)addTarget:(id)target
 {
