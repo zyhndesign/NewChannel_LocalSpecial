@@ -93,6 +93,12 @@
 {
     [backData appendData:data];
     [TaskClass setCurrentLenght:[data length]];
+//    if (AllOnceLoad)
+//    {
+//        AllLoadVideoLenght += [data length];
+//        RootViewContr.valueLb.text = [NSString stringWithFormat:@"%0.2f", AllLoadVideoLenght*100.0/AllVideoSize];
+//        RootViewContr.progressView.progress = AllLoadVideoLenght*1.0/AllVideoSize;
+//    }
 }
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection

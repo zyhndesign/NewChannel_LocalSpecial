@@ -539,6 +539,7 @@
     [SimpleQueStoryHandle  stopTask];
     [SimpleQueCommunHandle stopTask];
     [SimpleQueMusicHandle  stopTask];
+    [SimpleQueVideoHandle  stopTask];
 }
 // 打开所有任务
 - (IBAction)openAllTask:(UIButton*)sender

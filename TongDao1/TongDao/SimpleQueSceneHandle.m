@@ -16,7 +16,7 @@
 #import "SimpleQueStoryHandle.h"
 #import "SimpleQueCommunHandle.h"
 #import "SimpleQueMusicHandle.h"
-
+#import "SimpleQueVideoHandle.h"
 @implementation SimpleQueSceneHandle
 
 static __strong NSMutableArray *allTaskAry;
@@ -123,7 +123,7 @@ static BOOL Loading;
 
 + (BOOL)otherLoadingStatus
 {
-    if ([SimpleQueHumeHandle getLoadingStatus] || [SimpleQueStoryHandle getLoadingStatus] ||[SimpleQueCommunHandle getLoadingStatus] || [SimpleQueMusicHandle getLoadingStatus])
+    if ([SimpleQueHumeHandle getLoadingStatus] || [SimpleQueStoryHandle getLoadingStatus] ||[SimpleQueCommunHandle getLoadingStatus] || [SimpleQueMusicHandle getLoadingStatus]|| [SimpleQueVideoHandle getLoadingStatus])
     {
         return YES;
     }

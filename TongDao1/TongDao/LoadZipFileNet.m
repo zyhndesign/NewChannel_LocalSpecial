@@ -38,6 +38,15 @@
 {
     //http://lotusprize.com/travel/bundles/eae27d77ca20db309e056e3d2dcd7d69.zip
     connectNum = 0;
+    NSString *path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+    NSString *filePath = [path stringByAppendingPathComponent:[NSString stringWithFormat:@"%@", zipStr]];
+    BOOL dirt = NO;
+    if ([[NSFileManager defaultManager] fileExistsAtPath:filePath isDirectory:&dirt])
+    {
+        [TaskClass taskFinish:self];
+        return;
+    }
+    
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:urlStr] cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:60.0f];
     [request setHTTPMethod:@"GET"];
     
