@@ -302,10 +302,10 @@ static BOOL handleScrol;
     [allInfoArray addObjectsFromArray:cateFou];
     [allInfoArray addObjectsFromArray:cateFiv];
     
-    [AllGroupInfoArray replaceObjectAtIndex:1 withObject:cateTwo];
-    [AllGroupInfoArray replaceObjectAtIndex:2 withObject:cateThr];
-    [AllGroupInfoArray replaceObjectAtIndex:3 withObject:cateFou];
-    [AllGroupInfoArray replaceObjectAtIndex:4 withObject:cateFiv];
+    [AllGroupInfoArray replaceObjectAtIndex:TaskScence withObject:cateTwo];
+    [AllGroupInfoArray replaceObjectAtIndex:TaskHumanity withObject:cateThr];
+    [AllGroupInfoArray replaceObjectAtIndex:TaskStory withObject:cateFou];
+    [AllGroupInfoArray replaceObjectAtIndex:TaskCommunite withObject:cateFiv];
     
     [homePageViewCtr  loadSubview:cateOne];
     [landscapeViewCtr loadSubview:cateTwo];

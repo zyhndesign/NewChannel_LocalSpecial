@@ -191,7 +191,23 @@
     }
     else
     {
-        
+        NSArray *dataAry = [AllGroupInfoArray objectAtIndex:tag];
+        for (int i = 0; i < [dataAry count]; i++)
+        {
+            NSDictionary *infoDict = [dataAry objectAtIndex:i];
+            NSString *idStr  = [infoDict objectForKey:@"id"];
+            if (![self isEixstInArray:LocalFileNameArray content:idStr])
+            {
+                long simpleSize = [[infoDict objectForKey:@"size"] intValue];
+                allSimleSize += simpleSize;
+                LoadZipFileNet *loadZipNet = [[LoadZipFileNet alloc] initWithClass:[taskClass class]];
+                loadZipNet.delegate = nil;
+                loadZipNet.urlStr   = [[infoDict objectForKey:@"url"] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+                loadZipNet.md5Str   = [[infoDict objectForKey:@"md5"] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+                loadZipNet.zipStr   = [infoDict objectForKey:@"id"];
+                [taskClass addTarget:loadZipNet];
+            }
+        }
     }
     UILabel *label = (UILabel *)[[progresScrolV viewWithTag:(tag+1)*BaseViewTag] viewWithTag:(tag+1)*BaseLabelTag];
     //下载任务里面没有下载量，即没有任务，就把状态改为已下载
