@@ -31,6 +31,8 @@ BOOL playing;  // 音乐的播放状态
 BOOL AllLoad;
 BOOL AllOnceLoad;
 
+BOOL AllMusicListLoadOver;
+
 NSMutableArray *AllMusicQueAry;
 NSMutableDictionary *AllMovieInfoDict;
 long AllZipSize;

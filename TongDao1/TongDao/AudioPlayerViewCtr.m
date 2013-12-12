@@ -13,6 +13,7 @@
 #import "AllVariable.h"
 #import "LoadSimpleMusicNet.h"
 #import "SCGIFImageView.h"
+#import "ViewController.h"
 
 @interface AudioPlayerViewCtr ()
 
@@ -222,7 +223,8 @@
     NSArray *arry = [dict objectForKey:@"data"];
     
     [AllGroupInfoArray replaceObjectAtIndex:TaskMusic withObject:arry];
-    
+    AllMusicListLoadOver = YES;
+    [RootViewContr musicListLoadFinish];
 //    for (int i = 0; i < arry.count; i++)
 //    {
 //        NSDictionary *dict = [arry objectAtIndex:i];
@@ -234,6 +236,8 @@
 - (void)didReceiveErrorCode:(NSError *)ErrorDict
 {
     stopAllView.hidden = YES;
+    AllMusicListLoadOver = YES;
+    [RootViewContr musicListLoadFinish];
     [activeView stopAnimating];
     
 }

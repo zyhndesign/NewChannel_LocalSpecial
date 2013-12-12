@@ -106,12 +106,13 @@
     
     
     UIButton *showLoaderVBt = [UIButton buttonWithType:UIButtonTypeSystem];
-    [showLoaderVBt setFrame:CGRectMake(1024-100, 0, 100, 50)];
+    [showLoaderVBt setFrame:CGRectMake(1024-50, 668, 50, 50)];
     [showLoaderVBt setTitle:@"Show" forState:UIControlStateNormal];
     [showLoaderVBt addTarget:self action:@selector(showLoaderView:) forControlEvents:UIControlEventTouchDown];
     [self.view addSubview:showLoaderVBt];
     
     AllLoaderViewContr = [[LoaderViewController alloc] init];
+    [AllLoaderViewContr.view setFrame:CGRectMake(0, 768, AllLoaderViewContr.view.frame.size.width, AllLoaderViewContr.view.frame.size.height)];
     [self.view addSubview:AllLoaderViewContr.view];
     
     LoadMenuInfoNet *loadMenuInfoNet = [[LoadMenuInfoNet alloc] init];
@@ -332,8 +333,14 @@ static BOOL handleScrol;
     [humanityViewCtr  loadSubview:cateThr];
     [storyViewCtr     loadSubview:cateFou];
     [communityViewCtr loadSubview:cateFiv];
+    menuLoadFinish = YES;
     
-    [self caculateLoadTask];
+    if (AllMusicListLoadOver && menuLoadFinish)
+    {
+        [self showLoaderView:nil];
+        [self finishLoad];
+    }
+   // [self caculateLoadTask];
 }
 
 - (void)didReceiveErrorCode:(NSError *)ErrorDict
@@ -357,9 +364,23 @@ static BOOL handleScrol;
     [storyViewCtr     loadSubview:cateFou];
     [communityViewCtr loadSubview:cateFiv];
     
-    [self finishLoad];
+    menuLoadFinish = YES;
+    if (AllMusicListLoadOver && menuLoadFinish)
+    {
+        [self showLoaderView:nil];
+        [self finishLoad];
+    }
     UIAlertView *alerView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"网络数据有误，请检查网络连接" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
     [alerView show];
+}
+
+- (void)musicListLoadFinish
+{
+    if (AllMusicListLoadOver && menuLoadFinish)
+    {
+        [self showLoaderView:nil];
+        [self finishLoad];
+    }
 }
 
 - (void)caculateLoadTask

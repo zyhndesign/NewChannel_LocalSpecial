@@ -46,8 +46,9 @@
     IBOutlet UIActivityIndicatorView *activeView;
     
     BOOL isCloseMenuScrol;
-    
+    BOOL menuLoadFinish;
     NSMutableArray *videoArray;
+    
 }
 @property(nonatomic, strong)IBOutlet NSMutableArray *videoArray;;
 @property(nonatomic, strong)IBOutlet UIView *otherContentV;
@@ -64,4 +65,5 @@
 - (void)caculateMovieLoad;
 - (void)startLoadMovie;
 - (void)finishLoad;
+- (void)musicListLoadFinish;
 @end

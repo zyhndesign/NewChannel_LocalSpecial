@@ -67,7 +67,7 @@ static BOOL Loading;
     lenghtP += lenght;
     if (impLyLB)
     {
-        impLyLB.textColor = [UIColor redColor];
+        impLyLB.textColor = RedColor;
         impLyLB.text = [NSString stringWithFormat:@"%0.2f %@", lenghtP*100.0/allSize, @"%"];
     }
 }
