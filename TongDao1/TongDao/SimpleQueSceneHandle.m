@@ -105,6 +105,7 @@ static BOOL Loading;
 + (void)startTask
 {
     if (Loading || [SimpleQueSceneHandle otherLoadingStatus]) return;
+    lenghtP = 0;
     if (allTaskAry.count > 0)
     {
         Loading = YES;
