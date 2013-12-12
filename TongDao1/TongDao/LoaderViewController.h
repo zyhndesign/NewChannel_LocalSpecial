@@ -14,7 +14,10 @@
     IBOutlet UIView *menuView;
     IBOutlet UIView *loadProgresView;
     
-    IBOutlet UILabel *allProgresLb;
+    IBOutlet UILabel *backLb;
+    IBOutlet UIButton *stopAllTaskBt;
+    IBOutlet UIButton *hiddenTaskBt;
+    
     UILabel *currentLoadProLb;
     
     UIScrollView *menuScrolV;

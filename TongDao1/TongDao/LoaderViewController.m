@@ -85,6 +85,12 @@
     progresScrolV = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 46, ScrolViewWidth, ScrolViewHeigh)];
     [loadProgresView addSubview:progresScrolV];
     [progresScrolV setContentSize:CGSizeMake(584, 583)];
+    
+    [stopAllTaskBt setTitleColor:RedColor forState:UIControlStateNormal];
+    [hiddenTaskBt  setTitleColor:RedColor forState:UIControlStateNormal];
+    backLb.backgroundColor = RedColor;
+    
+    [self changeView:nil];
     [super viewDidLoad];
 }
 
@@ -275,7 +281,6 @@
     AllVideoSize = 0;
     AllLoadVideoLenght = 0;
     
-    [AllMovieInfoDict removeAllObjects];
     [XMLParser clear];
     
     NSString *path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
@@ -324,7 +329,7 @@
     [SimpleQueVideoHandle setSize:AllVideoSize];
     if (AllVideoSize < 1000)
     {
-        [self FinishLoad:TaskVideo];
+       // [self FinishLoad:TaskVideo];
     }
 }
 
@@ -352,11 +357,10 @@
     implyLb.hidden = YES;
     
     UIButton *implyBt = (UIButton *)[[progresScrolV viewWithTag:(taskTag+1)*BaseViewTag] viewWithTag:taskTag+1];
-    [implyBt setTitle:@"已完成" forState:UIControlStateNormal];
-    [implyBt setBackgroundColor:[UIColor whiteColor]];
+    [implyBt setTitle:@"" forState:UIControlStateNormal];
+    [implyBt setBackgroundImage:[UIImage imageNamed:@"icon_tick_50.png"] forState:UIControlStateNormal];
     implyBt.titleLabel.font = [UIFont systemFontOfSize:17];
-    [implyBt setFrame:CGRectMake(ScrolViewWidth-60-10, 10, 60, 40)];
-    
+    [implyBt setFrame:CGRectMake(ScrolViewWidth-34-10, 13, 34, 34)];
 }
 
 #pragma mark - view handle
@@ -437,9 +441,9 @@
     
     UIButton *canleBt = [UIButton buttonWithType:UIButtonTypeCustom];
     canleBt.tag = (viewTag+1);
-    [canleBt setBackgroundColor:[UIColor lightGrayColor]];
+    [canleBt setBackgroundColor:[UIColor whiteColor]];
     [canleBt setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [canleBt setTitle:@"取消" forState:UIControlStateNormal];
+    [canleBt setTitle:@"" forState:UIControlStateNormal];
     canleBt.titleLabel.font = [UIFont systemFontOfSize:14];
     [canleBt addTarget:self action:@selector(canleLoader:) forControlEvents:UIControlEventTouchDown];
     [canleBt setFrame:CGRectMake(ScrolViewWidth-40-10, 20, 40, 20)];
@@ -467,6 +471,7 @@
     [view addSubview:titleLb];
     
     UISwitch *swithV = [[UISwitch alloc] initWithFrame:CGRectMake(523, 15, 80, 27)];
+    swithV.on = YES;
     swithV.onTintColor = [UIColor blueColor];
     swithV.thumbTintColor = [UIColor lightGrayColor];
     swithV.tag = (viewTag+1)*BaseSwitchTag;
@@ -497,7 +502,8 @@
 // canle loader
 - (void)canleLoader:(UIButton*)sender
 {
-    if ([sender.titleLabel.text isEqualToString:@"已取消"])
+    return;
+    if ([sender.titleLabel.text isEqualToString:@""])
         return;
     if ([sender.titleLabel.text isEqualToString:@"已完成"])
         return;
@@ -516,6 +522,9 @@
 //切换界面，重新安排下载任务
 - (IBAction)changeView:(UIButton*)sender
 {
+    [self rebuildProgressView];
+    return;
+    
     CATransition *animation = [CATransition animation];
     animation.delegate = self;
     animation.duration = 0.7;
@@ -559,6 +568,7 @@
     [SimpleQueCommunHandle stopTask];
     [SimpleQueMusicHandle  stopTask];
     [SimpleQueVideoHandle  stopTask];
+    [self hiddenView:nil];
 }
 // 打开所有任务
 - (IBAction)openAllTask:(UIButton*)sender

@@ -19,6 +19,7 @@
 #import "XMLParser.h"
 #import "LoadSimpleMovieNet.h"
 #import "QueueVideoHandle.h"
+#import "SimpleQueSceneHandle.h"
 
 @interface ViewController ()
 
@@ -104,17 +105,6 @@
     [_scrollView addSubview:communityViewCtr.view];
     [_scrollView addSubview:versionViewCtr.view];
     
-    
-    UIButton *showLoaderVBt = [UIButton buttonWithType:UIButtonTypeSystem];
-    [showLoaderVBt setFrame:CGRectMake(1024-50, 668, 50, 50)];
-    [showLoaderVBt setTitle:@"Show" forState:UIControlStateNormal];
-    [showLoaderVBt addTarget:self action:@selector(showLoaderView:) forControlEvents:UIControlEventTouchDown];
-    [self.view addSubview:showLoaderVBt];
-    
-    AllLoaderViewContr = [[LoaderViewController alloc] init];
-    [AllLoaderViewContr.view setFrame:CGRectMake(0, 768, AllLoaderViewContr.view.frame.size.width, AllLoaderViewContr.view.frame.size.height)];
-    [self.view addSubview:AllLoaderViewContr.view];
-    
     LoadMenuInfoNet *loadMenuInfoNet = [[LoadMenuInfoNet alloc] init];
     loadMenuInfoNet.delegate = self;
     [loadMenuInfoNet loadMenuFromUrl];
@@ -140,6 +130,19 @@
     progressView.trackTintColor = [UIColor lightGrayColor];
 }
 
+- (void)addLoadViewContr
+{
+    UIButton *showLoaderVBt = [UIButton buttonWithType:UIButtonTypeSystem];
+    [showLoaderVBt setFrame:CGRectMake((1024-150)/2, 768-50, 150, 50)];
+    [showLoaderVBt setBackgroundImage:[UIImage imageNamed:@"cache_btn.png"] forState:UIControlStateNormal];
+    [showLoaderVBt addTarget:self action:@selector(showLoaderView:) forControlEvents:UIControlEventTouchDown];
+    [self.view addSubview:showLoaderVBt];
+    
+    AllLoaderViewContr = [[LoaderViewController alloc] init];
+    [AllLoaderViewContr.view setFrame:CGRectMake(0, 768, AllLoaderViewContr.view.frame.size.width, AllLoaderViewContr.view.frame.size.height)];
+    [self.view addSubview:AllLoaderViewContr.view];
+}
+
 - (void)addMaskView
 {
 
@@ -159,6 +162,7 @@
                          [AllLoaderViewContr.view setFrame:CGRectMake(0, 0, AllLoaderViewContr.view.frame.size.width, AllLoaderViewContr.view.frame.size.height)];
                      }
                      completion:^(BOOL finish){
+                         [SimpleQueSceneHandle startTask];
                      }];
 }
 #pragma mark - scrollview delegate
@@ -335,12 +339,13 @@ static BOOL handleScrol;
     [communityViewCtr loadSubview:cateFiv];
     menuLoadFinish = YES;
     
+    [self caculateLoadTask];
+    [self addLoadViewContr];
     if (AllMusicListLoadOver && menuLoadFinish)
     {
         [self showLoaderView:nil];
         [self finishLoad];
     }
-   // [self caculateLoadTask];
 }
 
 - (void)didReceiveErrorCode:(NSError *)ErrorDict
@@ -365,6 +370,8 @@ static BOOL handleScrol;
     [communityViewCtr loadSubview:cateFiv];
     
     menuLoadFinish = YES;
+    [self caculateLoadTask];  ///// 分析出 视频下载地址
+    [self addLoadViewContr];
     if (AllMusicListLoadOver && menuLoadFinish)
     {
         [self showLoaderView:nil];
@@ -423,7 +430,7 @@ static BOOL handleScrol;
             [videoArray addObject:infoDict];
         }
     }
-    [self caculateMovieLoad];
+    //[self caculateMovieLoad];
 }
 
 - (void)caculateMovieLoad
