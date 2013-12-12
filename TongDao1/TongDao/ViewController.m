@@ -20,6 +20,7 @@
 #import "LoadSimpleMovieNet.h"
 #import "QueueVideoHandle.h"
 #import "SimpleQueSceneHandle.h"
+#import "LoaderViewController.h"
 
 @interface ViewController ()
 
