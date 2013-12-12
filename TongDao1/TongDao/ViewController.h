@@ -50,7 +50,7 @@
     NSMutableArray *videoArray;
     
 }
-@property(nonatomic, strong)IBOutlet NSMutableArray *videoArray;;
+@property(nonatomic, strong)NSMutableArray *videoArray;;
 @property(nonatomic, strong)IBOutlet UIView *otherContentV;
 @property(nonatomic, strong)IBOutlet UIProgressView *progressView;
 @property(nonatomic, strong)IBOutlet UILabel *valueLb;
