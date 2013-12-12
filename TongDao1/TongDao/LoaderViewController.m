@@ -290,7 +290,8 @@
         NSString *docXmlPath = [path stringByAppendingPathComponent:[NSString stringWithFormat:@"%@/doc.xml", [initDict objectForKey:@"id"]]];
         [[XMLParser alloc] initWithFilePath:docXmlPath];
     }
-    [self performSelector:@selector(goOnCaculateMovieLoader) withObject:nil afterDelay:0.2f];
+    [self goOnCaculateMovieLoader];
+   // [self performSelector:@selector(goOnCaculateMovieLoader) withObject:nil afterDelay:0.2f];
 }
 
 - (void)goOnCaculateMovieLoader

@@ -111,6 +111,7 @@ static BOOL Loading;
     NSLog(@"taskCount:%d", [allTaskAry count]);
     if(Loading) return;
     lenghtP = 0;
+    [AllLoaderViewContr caculateVedioLoadTask];
     if (allTaskAry.count > 0)
     {
         Loading = YES;

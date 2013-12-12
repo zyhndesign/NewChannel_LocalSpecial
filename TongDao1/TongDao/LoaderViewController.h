@@ -37,6 +37,7 @@
 - (IBAction)closeAllTask:(UIButton*)sender;
 
 - (void)FinishLoad:(int)taskTag;
+- (void)caculateVedioLoadTask;
 
 @end
 
