@@ -212,8 +212,11 @@
 }
 - (void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag
 {
-    [gifImageView stopAnimating];
-    playMusicImageV.hidden = NO;
+    [self next:nil];
+//    [gifImageView stopAnimating];
+//    [playerBt setBackgroundImage:[UIImage imageNamed:@"music_btn_pause_normal.png"] forState:UIControlStateNormal];
+//    [playerBt setBackgroundImage:[UIImage imageNamed:@"music_btn_pause_pressed.png"] forState:UIControlStateHighlighted];
+//    playMusicImageV.hidden = NO;
 }
 #pragma mark - net delegate
 - (void)didReceiveData:(NSDictionary *)dict
