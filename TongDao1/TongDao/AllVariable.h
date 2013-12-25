@@ -33,7 +33,7 @@ BOOL AllOnceLoad;
 
 BOOL AllMusicListLoadOver;
 
-NSMutableArray *AllMusicQueAry;
+NSMutableArray *AllMusicQueAry;  /// 本地音乐的名
 NSMutableDictionary *AllMovieInfoDict;
 long AllZipSize;
 long AllLoadLenght;

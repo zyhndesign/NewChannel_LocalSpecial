@@ -37,7 +37,7 @@
 
 ////////////////////////////////////////////////
 
-
+// 音乐文件名为中文的情况，没处理
 - (void)loadMusicData:(NSString*)url musicName:(NSString*)musicName
 {
     NSString *path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
