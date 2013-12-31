@@ -25,4 +25,7 @@
 + (void)clear;
 + (BOOL)getLoadingStatus;
 + (void)stopTask;
++ (void)checkAfterStartTask;
++ (BOOL)checkTask;
++ (void)sureFinish;
 @end
