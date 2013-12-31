@@ -28,4 +28,6 @@
 + (void)checkAfterStartTask;
 + (BOOL)checkTask;
 + (void)sureFinish;
+
+
 @end
